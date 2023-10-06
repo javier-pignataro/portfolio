@@ -3,267 +3,361 @@ window.onload = initialice;
 
 function initialice()
 {
-      // document.onwheel = tellScroll;
-      window.addEventListener( "wheel", tellScroll );
-      const rightBoxWrapper = document.querySelector( '.right-box-wrapper' );
-      const rightBox = document.querySelector( '.right-box' );
-      const maxShifting = rightBoxWrapper.clientHeight - rightBox.clientHeight;
-      let currentScrollPos = 0;
-      let velocityAcumulator = 0;
-      let scrollingWindowTimer = 0;
+      // Variables for Desktop
+      let desktop = false;
+      let rightBoxWrapper;
+      let rightBox;
+      let maxShifting;
+      let currentScrollPos;
+      let velocityAcumulator;
+      let scrollingWindowTimer
 
       // Constants for topicsProps Object
-      const topic0 = document.getElementById( "about-topic" );
-      const topic1 = document.getElementById( "experience-topic" );
-      const topic2 = document.getElementById( "projects-topic" );
-      const section0 = document.querySelector( ".about-section" );
-      const section1 = document.querySelector( ".experience-section" );
-      const section2 = document.querySelector( ".projects-section" );
+      let topic0;
+      let topic1;
+      let topic2;
+      let section0;
+      let section1;
+      let section2;
 
-      let topicsProps = {
-            current: null,
-            last: null,
-            currentSelected: null,
-            lastSelected: null,
+      // Execute function every 50ms
+      let scrollingInertiaInterval;
+      let scrollingTimingInterval;
 
-            topicsIndex: [
-                  topic0,
-                  topic1,
-                  topic2,
-            ],
+      // Hover
+      let topics;
+      let wrapperTopics;
 
-            topicsChildrenIndex: [
-                  topic0.children[0],
-                  topic1.children[0],
-                  topic2.children[0],
-            ],
+      // Animation variables for scrolling chain
+      let animationUp;
+      let animationDown;
 
-            topicSectionsIndex: [
-                  section0,
-                  section1,
-                  section2
-            ],
+      // Object for desktop topic functionality
+      let topicsProps;
 
-            topicSectionsLimitPixels: [
-                  0,
-                  ( 
-                        + section0.clientHeight
-                        + parseInt(window.getComputedStyle(section0).getPropertyValue("margin-bottom").slice(0, -2))
-                        + 1
-                  ),
-                  ( 
-                        + section0.clientHeight
-                        + parseInt(window.getComputedStyle(section0).getPropertyValue("margin-bottom").slice(0, -2))
-                        + section1.clientHeight
-                        + parseInt(window.getComputedStyle(section1).getPropertyValue("margin-bottom").slice(0, -2))
-                        + 1
-                  ),
-            ],
+      let x = window.matchMedia("(max-width: 1200px)")
+      responsiveListener(x) // Call listener function at run time
+      x.addListener(responsiveListener) // Attach listener function on state changes
 
-            select: function( ev, i )
-            {
-                  this.lastSelected = this.currentSelected;
-                  this.currentSelected = i;
+      function responsiveListener(x) {
+            if (x.matches) { // If media query matches
+                  responsiveMobile();
+            } else {
+                  responsiveDesktop();
+            }
+      }
 
-                  // Remove event listeners
-                  // topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );
-                  // topicsProps.topicsIndex[1].removeEventListener( "click", clickOnTopics );
-                  // topicsProps.topicsIndex[2].removeEventListener( "click", clickOnTopics );
-
-                  console.log( "CURRENT" + i );
-                  console.log( "lastSelected" + this.lastSelected );
-                  console.log( "currentSelected" + this.currentSelected );
+      function responsiveMobile()
+      {
+            if( desktop ){
+                  resetDesktopVariables();
+            }
+      }
 
 
-                  // If I have a previous selected element
-                  if( this.lastSelected !== null ){ // Shift back
-                        // Shift Back
-                        this.topicsChildrenIndex[this.lastSelected].style.left = "0px";
-                        // Deselect background
-                        // this.lastSelected.classList.add('notransition');
-                        this.topicsIndex[this.lastSelected].style.transition = "none";
-                        this.topicsIndex[this.lastSelected].style.backgroundColor = "#dbbc7f00";
-                        this.topicsIndex[this.lastSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                        this.topicsChildrenIndex[this.lastSelected].style.fontWeight = "400";
-                        this.topicsChildrenIndex[this.lastSelected].style.color = "#D3C6AA";
-                  }
+      function resetDesktopVariables()
+      {
+            // Variables for Desktop
+            window.removeEventListener( "wheel", tellScroll );
+            let desktop = false;
+            let rightBoxWrapper = null;
+            let rightBox = null;
+            let maxShifting = null;
+            let currentScrollPos = null;
+            let velocityAcumulator = null;
+            let scrollingWindowTime = null;
 
-                  // Shift 
-                  this.topicsChildrenIndex[this.currentSelected].style.left = "5%";
-                  // Select BG
-                  // this.topicsIndex[this.currentSelected].classList.add('notransition');
-                  this.topicsIndex[this.currentSelected].style.transition = "none";
-                  this.topicsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f99";
-                  this.topicsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                  this.topicsIndex[this.currentSelected].style.transition = "background-color 0.5s ease-in";
-                  this.topicsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f33";
-                  this.topicsChildrenIndex[this.currentSelected].style.fontWeight = "900";
-                  this.topicsChildrenIndex[this.currentSelected].style.color = "#ffefcc";
+            // Constants for topicsProps Object
+            let topic0 = null;
+            let topic1 = null;
+            let topic2 = null;
+            let section0 = null;
+            let section1 = null;
+            let section2 = null;
 
-                        // setTimeout(
-                        //       ()=>
-                        //       {
-                        //             topicsProps.topicsIndex[0].addEventListener( "click", clickOnTopics );
-                        //             topicsProps.topicsIndex[1].addEventListener( "click", clickOnTopics );
-                        //             topicsProps.topicsIndex[2].addEventListener( "click", clickOnTopics );
-                        //       },
-                        //       8000
-                        // )
+            // Execute function every 50ms
+            let scrollingInertiaInterval = null;
+            let scrollingTimingInterval = null;
 
-                  // If ev is not null, the alignNBlink function is executed 
-                  if( ev ){
-                        // Once a Topic is selected, align and blink right topic section ( -> )
-                        this.alignNBlink( null, i );
-                  } else {
-                  }
-            },
+            // Hover
+            let topics = null;
+            let wrapperTopics = null;
 
-            colorMarkOn: function ( ev, i )
-            {
-                  this.last = this.current;
-                  this.current = i;
-                  if( this.current !== this.currentSelected ) {
-                        this.topicsChildrenIndex[this.current].style.fontWeight = "900";
-                        this.topicsChildrenIndex[this.current].style.color = "#ffefcc";
-                  }
-            },
+            // Animation variables for scrolling chain
+            let animationUp = null;
+            let animationDown = null;
 
-            colorMarkOff: function ( ev, i )
-            {
-                  if( this.current !== this.currentSelected ) {
-                        this.topicsChildrenIndex[this.current].style.fontWeight = "400";
-                        this.topicsChildrenIndex[this.current].style.color = "#D3C6AA";
-                  }
-            },
+            // Object for desktop topic functionality
+            let topicsProps;
+      }
 
-            alignNBlink: function ( ev, i )
-            {
+      function responsiveDesktop()
+      {
+            // document.onwheel = tellScroll;
+            desktop = true;
+            window.addEventListener( "wheel", tellScroll );
+            rightBoxWrapper = document.querySelector( '.right-box-wrapper' );
+            rightBox = document.querySelector( '.right-box' );
+            maxShifting = rightBoxWrapper.clientHeight - rightBox.clientHeight;
+            currentScrollPos = 0;
+            velocityAcumulator = 0;
+            scrollingWindowTimer = 0;
 
-                  if( !ev ){ // if 'ev' is null. This function is invoked after the <select> function
+            // Constants for topicsProps Object
+            topic0 = document.getElementById( "about-topic" );
+            topic1 = document.getElementById( "experience-topic" );
+            topic2 = document.getElementById( "projects-topic" );
+            section0 = document.querySelector( ".about-section" );
+            section1 = document.querySelector( ".experience-section" );
+            section2 = document.querySelector( ".projects-section" );
 
-                        // // Clear selecting trigger by offset changes
-                        // clearInterval(rBoxInterv);
+            topicsProps = {
+                  current: null,
+                  last: null,
+                  currentSelected: null,
+                  lastSelected: null,
 
-                        // Move and Blink section ( without selecting topic )
-                        // rightBoxWrapper.classList.remove( "noanimation" );
-                        //
+                  topicsIndex: [
+                        topic0,
+                        topic1,
+                        topic2,
+                  ],
 
-                        // console.log( animationUp + animationDown );
-                        // try{
-                        //       animationUp.cancel();
-                        //       animationDown.cancel();
-                        // } catch {
-                        //       console.warn( "no animatin ongoing" );
-                        // }
-                        
-                        rightBoxWrapper.style.animation = "none";
-                        rightBoxWrapper.offsetTop;
+                  topicsChildrenIndex: [
+                        topic0.children[0],
+                        topic1.children[0],
+                        topic2.children[0],
+                  ],
 
-                        window.removeEventListener( "wheel", tellScroll );
+                  topicSectionsIndex: [
+                        section0,
+                        section1,
+                        section2
+                  ],
 
-                        // BLink
-                        // Last selected
-                        if( this.currentSelected != null ){
-                              this.topicSectionsIndex[this.lastSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                              this.topicSectionsIndex[this.lastSelected].style.backgroundColor = "#dbbc7f00";
+                  topicSectionsLimitPixels: [
+                        0,
+                        ( 
+                              + section0.clientHeight
+                              + parseInt(window.getComputedStyle(section0).getPropertyValue("margin-bottom").slice(0, -2))
+                              + 1
+                        ),
+                        ( 
+                              + section0.clientHeight
+                              + parseInt(window.getComputedStyle(section0).getPropertyValue("margin-bottom").slice(0, -2))
+                              + section1.clientHeight
+                              + parseInt(window.getComputedStyle(section1).getPropertyValue("margin-bottom").slice(0, -2))
+                              + 1
+                        ),
+                  ],
+
+                  select: function( ev, i )
+                  {
+                        this.lastSelected = this.currentSelected;
+                        this.currentSelected = i;
+
+                        // Remove event listeners
+                        // topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );
+                        // topicsProps.topicsIndex[1].removeEventListener( "click", clickOnTopics );
+                        // topicsProps.topicsIndex[2].removeEventListener( "click", clickOnTopics );
+
+                        console.log( "CURRENT" + i );
+                        console.log( "lastSelected" + this.lastSelected );
+                        console.log( "currentSelected" + this.currentSelected );
+
+
+                        // If I have a previous selected element
+                        if( this.lastSelected !== null ){ // Shift back
+                              // Shift Back
+                              this.topicsChildrenIndex[this.lastSelected].style.left = "0px";
+                              // Deselect background
+                              // this.lastSelected.classList.add('notransition');
+                              this.topicsIndex[this.lastSelected].style.transition = "none";
+                              this.topicsIndex[this.lastSelected].style.backgroundColor = "#dbbc7f00";
+                              this.topicsIndex[this.lastSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                              this.topicsChildrenIndex[this.lastSelected].style.fontWeight = "400";
+                              this.topicsChildrenIndex[this.lastSelected].style.color = "#D3C6AA";
                         }
 
-                        // current selected --> < i >
-                        this.topicSectionsIndex[this.currentSelected].style.transition = "none";
-                        this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                        this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f33";
-                        this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                        this.topicSectionsIndex[this.currentSelected].style.transition = "background-color 0.5s ease-in";
-                        this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                        this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f00";
+                        // Shift 
+                        this.topicsChildrenIndex[this.currentSelected].style.left = "5%";
+                        // Select BG
+                        // this.topicsIndex[this.currentSelected].classList.add('notransition');
+                        this.topicsIndex[this.currentSelected].style.transition = "none";
+                        this.topicsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f99";
+                        this.topicsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                        this.topicsIndex[this.currentSelected].style.transition = "background-color 1.0s ease-in";
+                        this.topicsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f33";
+                        this.topicsChildrenIndex[this.currentSelected].style.fontWeight = "900";
+                        this.topicsChildrenIndex[this.currentSelected].style.color = "#ffefcc";
 
-                        // Align
-                        console.log( this.topicSectionsLimitPixels );
-                        rightBoxWrapper.animate(
-                              {
-                                    top: `${-this.topicSectionsLimitPixels[i]}px` // Scroll Up
-                              },
-                              {
-                                    duration: 800,
-                                    fill: "forwards",
-                                    easing: "ease",
-                              }
-                        ).addEventListener( "finish", restoreOnWheelListener );
+                        // setTimeout(
+                              //       ()=>
+                              //       {
+                                    //             topicsProps.topicsIndex[0].addEventListener( "click", clickOnTopics );
+                                    //             topicsProps.topicsIndex[1].addEventListener( "click", clickOnTopics );
+                                    //             topicsProps.topicsIndex[2].addEventListener( "click", clickOnTopics );
+                                    //       },
+                              //       8000
+                              // )
 
-                        // setTimeout(() => {
-                        //       rBoxInterv = window.setInterval( selectByOffset, 50);
-                        // }, "800");
-                        
+                        // If ev is not null, the alignNBlink function is executed 
+                        if( ev ){
+                              // Once a Topic is selected, align and blink right topic section ( -> )
+                              this.alignNBlink( null, i );
+                        } else {
+                        }
+                  },
 
-                  } 
-                  else { // if 'ev' is true. This function is invoked after the <tellScroll> function
-                        if( true ){
-                              if( this.currentSelected == i ){
-                              }
-                              if( this.currentSelected != i ){
-                                    console.log( "CURRENT SELECTED : : : : " + i );
-                                    console.log( ev );
-                                    // Blink Section ( select topic )
+                  colorMarkOn: function ( ev, i )
+                  {
+                        this.last = this.current;
+                        this.current = i;
+                        if( this.current !== this.currentSelected ) {
+                              this.topicsChildrenIndex[this.current].style.fontWeight = "900";
+                              this.topicsChildrenIndex[this.current].style.color = "#ffefcc";
+                        }
+                  },
+
+                  colorMarkOff: function ( ev, i )
+                  {
+                        if( this.current !== this.currentSelected ) {
+                              this.topicsChildrenIndex[this.current].style.fontWeight = "400";
+                              this.topicsChildrenIndex[this.current].style.color = "#D3C6AA";
+                        }
+                  },
+
+                  alignNBlink: function ( ev, i )
+                  {
+
+                        if( !ev ){ // if 'ev' is null. This function is invoked after the <select> function
+
+                              // // Clear selecting trigger by offset changes
+                              // clearInterval(rBoxInterv);
+
+                              // Move and Blink section ( without selecting topic )
+                              // rightBoxWrapper.classList.remove( "noanimation" );
+                              //
+
+                                    // console.log( animationUp + animationDown );
+                              // try{
+                                    //       animationUp.cancel();
+                                    //       animationDown.cancel();
+                                    // } catch {
+                                          //       console.warn( "no animatin ongoing" );
+                                          // }
+
+                              rightBoxWrapper.style.animation = "none";
+                              rightBoxWrapper.offsetTop;
+
+                              window.removeEventListener( "wheel", tellScroll );
 
                               // BLink
                               // Last selected
-                              // if( this.currentSelected != null ){
-                              //       this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                              //       this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f00";
-                              // }
-                              //
-                              // // current selected --> < i >
-                              // this.topicSectionsIndex[i].style.transition = "none";
-                              // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                              // this.topicSectionsIndex[i].style.backgroundColor = "#dbbc7f33";
-                              // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                              // this.topicSectionsIndex[i].style.transition = "background-color 0.5s ease-in";
-                              // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                              // this.topicSectionsIndex[i].style.backgroundColor = "#dbbc7f00";
-
-
-
-                                    // Select TOpic
-                                    this.select( null, i );
-                                    console.log( "Select this: : : : " + i );
+                              if( this.currentSelected != null ){
+                                    this.topicSectionsIndex[this.lastSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                    this.topicSectionsIndex[this.lastSelected].style.backgroundColor = "#dbbc7f00";
                               }
+
+                              // current selected --> < i >
+                                    this.topicSectionsIndex[this.currentSelected].style.transition = "none";
+                              this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                              this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f33";
+                              this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                              this.topicSectionsIndex[this.currentSelected].style.transition = "background-color 1.0s ease-in";
+                              this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                              this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f00";
+
+                              // Align
+                              console.log( this.topicSectionsLimitPixels );
+                              rightBoxWrapper.animate(
+                                    {
+                                          top: `${-this.topicSectionsLimitPixels[i]}px` // Scroll Up
+                                    },
+                                    {
+                                          duration: 800,
+                                          fill: "forwards",
+                                          easing: "ease",
+                                    }
+                              ).addEventListener( "finish", restoreOnWheelListener );
+
+                              // setTimeout(() => {
+                                    //       rBoxInterv = window.setInterval( selectByOffset, 50);
+                                    // }, "800");
+
+
+                        } 
+                        else { // if 'ev' is true. This function is invoked after the <tellScroll> function
+                              if( true ){
+                                    if( this.currentSelected == i ){
+                                    }
+                                    if( this.currentSelected != i ){
+                                          console.log( "CURRENT SELECTED : : : : " + i );
+                                          console.log( ev );
+                                          // Blink Section ( select topic )
+
+                                          // BLink
+                                          // Last selected
+                                          // if( this.currentSelected != null ){
+                                                //       this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                                //       this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f00";
+                                                // }
+                                          //
+                                                // // current selected --> < i >
+                                                // this.topicSectionsIndex[i].style.transition = "none";
+                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                          // this.topicSectionsIndex[i].style.backgroundColor = "#dbbc7f33";
+                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                          // this.topicSectionsIndex[i].style.transition = "background-color 0.5s ease-in";
+                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                          // this.topicSectionsIndex[i].style.backgroundColor = "#dbbc7f00";
+
+
+
+                                          // Select TOpic
+                                          this.select( null, i );
+                                          console.log( "Select this: : : : " + i );
+                                    }
+                              }
+
                         }
-
                   }
-            }
-      };
+            };
 
-      // Execute function every 50ms
-      let scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 50);
-      let scrollingTimingInterval = window.setInterval( scrollingWindow, 1000);
+            // Execute function every 50ms
+            scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 50);
+            scrollingTimingInterval = window.setInterval( scrollingWindow, 900);
 
-      console.log( section0 );
-      // section0.style.backgroundColor = "#dbbc7f99";
+            console.log( section0 );
+            // section0.style.backgroundColor = "#dbbc7f99";
 
-      // Hover
-      const topics = document.querySelectorAll( '.topics' );
-      const wrapperTopics = document.querySelectorAll( '.wrapper-topics' );
+            // Hover
+            topics = document.querySelectorAll( '.topics' );
+            wrapperTopics = document.querySelectorAll( '.wrapper-topics' );
 
-      // console.log(topics);
-      // console.log(wrapperTopics);
+            // console.log(topics);
+            // console.log(wrapperTopics);
 
-      // Topics Listeners
-      topicsProps.topicsIndex[0].addEventListener( "mouseenter", (ev)=>{ topicsProps.colorMarkOn( ev, 0 ); } );
-      topicsProps.topicsIndex[0].addEventListener( "mouseleave", (ev)=>{ topicsProps.colorMarkOff( ev, 0 ); } );
-      topicsProps.topicsIndex[0].addEventListener( "click", clickOnTopics );
-      topicsProps.topicsIndex[1].addEventListener( "mouseenter", (ev)=>{ topicsProps.colorMarkOn( ev, 1 ); } );
-      topicsProps.topicsIndex[1].addEventListener( "mouseleave", (ev)=>{ topicsProps.colorMarkOff( ev, 1 ); } );
-      topicsProps.topicsIndex[1].addEventListener( "click", clickOnTopics );
-      topicsProps.topicsIndex[2].addEventListener( "mouseenter", (ev)=>{ topicsProps.colorMarkOn( ev, 2 ); } );
-      topicsProps.topicsIndex[2].addEventListener( "mouseleave", (ev)=>{ topicsProps.colorMarkOff( ev, 2 ); } );
-      topicsProps.topicsIndex[2].addEventListener( "click", clickOnTopics );
+            // Topics Listeners
+            topicsProps.topicsIndex[0].addEventListener( "mouseenter", (ev)=>{ topicsProps.colorMarkOn( ev, 0 ); } );
+            topicsProps.topicsIndex[0].addEventListener( "mouseleave", (ev)=>{ topicsProps.colorMarkOff( ev, 0 ); } );
+            topicsProps.topicsIndex[0].addEventListener( "click", clickOnTopics );
+            topicsProps.topicsIndex[1].addEventListener( "mouseenter", (ev)=>{ topicsProps.colorMarkOn( ev, 1 ); } );
+            topicsProps.topicsIndex[1].addEventListener( "mouseleave", (ev)=>{ topicsProps.colorMarkOff( ev, 1 ); } );
+            topicsProps.topicsIndex[1].addEventListener( "click", clickOnTopics );
+            topicsProps.topicsIndex[2].addEventListener( "mouseenter", (ev)=>{ topicsProps.colorMarkOn( ev, 2 ); } );
+            topicsProps.topicsIndex[2].addEventListener( "mouseleave", (ev)=>{ topicsProps.colorMarkOff( ev, 2 ); } );
+            topicsProps.topicsIndex[2].addEventListener( "click", clickOnTopics );
 
-      // Begin selected the first topic as default
-      topicsProps.select( null, 0 );
+            // Begin selected the first topic as default
+            topicsProps.select( null, 0 );
 
-      // Callback for the changes in the RightBoxWrapper Y-Offset
-      //
-            //
+            // Animation variables for scrolling chain
+            animationUp = null;
+            animationDown = null;
+
+
+      }
 
       function restoreOnWheelListener(ev)
       {
@@ -275,11 +369,11 @@ function initialice()
             console.log( "hola papeh. ANIMATION END --> <><> <><>" );
             currentScrollPos = rightBoxWrapper.offsetTop;
             if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[0] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[1] )
-                        topicsProps.alignNBlink( true, 0 );
+                  topicsProps.alignNBlink( true, 0 );
             if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[1] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[2] )
-                        topicsProps.alignNBlink( true, 1 );
+                  topicsProps.alignNBlink( true, 1 );
             if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[2] )
-                        topicsProps.alignNBlink( true, 2 );
+                  topicsProps.alignNBlink( true, 2 );
       }
 
       function clickOnTopics( ev )
@@ -309,9 +403,6 @@ function initialice()
             velocityAcumulator ? velocityAcumulator -= 50 : false;
       }
 
-      let animationUp = null;
-      let animationDown = null;
-
       function tellScroll(ev)
       {
             // The actual Y-Offset of the right box 
@@ -331,10 +422,8 @@ function initialice()
             // Start scrollingWindowTimer
             scrollingWindowTimer = 1;
 
-
-
+            // Up or Down scrolling
             if( ev.deltaY > 0 ){
-                  // console.log( rightBoxWrapper.offsetTop );
                   // Limit the amount of shifting to keep the box in the display
                   let amount = (currentScrollPos - velocityAcumulator) > -(maxShifting) ? (currentScrollPos - velocityAcumulator) : -(maxShifting);
                   animationDown = rightBoxWrapper.animate(
@@ -367,5 +456,9 @@ function initialice()
                   // console.log( rightBoxWrapper.offsetTop );
             }
       }
+
+
+
 }
+
 

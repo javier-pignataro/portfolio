@@ -39,6 +39,7 @@ user-select: none;
       flex-direction: column;
       align-items: left;
       justify-content: flex-start;
+      font-size: 1rem;
       width: 28.3vw;
       height: 44.4vh;
       /* overflow: hidden; */
@@ -90,7 +91,8 @@ user-select: none;
       width: 26.6vw;
       top: 0px;
       background-color: #00000000;
-      transition: background-color 0.5s ease-in;
+      transition: background-color 1.0s ease-in;
+      font-size: 1.125rem;
 }
 
 /* .right-box.shifting{ */
@@ -101,23 +103,24 @@ user-select: none;
 
 
 .name {
-      font-size: 53px;
+      font-size: 3.3125em;
       font-weight: 700;
       border-bottom: 1px solid #D3C6AA55;
+      margin-bottom: 15px;
 }
 
 .occupation-box{
       padding: 0px 10px;
-      margin: 15px 0px 25px 0px;
+      margin-bottom: 25px;
 }
 
 .occupation {
-      font-size: 24px;
+      font-size: 1.5em;
       font-weight: 500;
 }
 
 .occupation-descr {
-      font-size: 18px;
+      font-size: 1.125em;
       font-weight: 400;
       color: #D3C6AA99
       /* opacity: 60%; */
@@ -128,6 +131,7 @@ user-select: none;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
+      margin-bottom: 25px;
 }
 
 .wrapper-topics {
@@ -147,7 +151,7 @@ user-select: none;
 .topics {
       position: relative;
       width: 100%;
-      font-size: 18px;
+      font-size: 1.125em;
       font-weight: 400;
       font-style: italic;
       background-color: rgba( 0, 0, 0, 0.0 );
@@ -173,15 +177,16 @@ user-select: none;
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
-      font-size: 35px;
       
 }
 
 .social-icon {
       margin-right: 15px;
+      font-size: 1.5em;
 }
 
 .name,
+.social-networks,
 .wrapper-topics > *
 {
       padding: 10px;
@@ -203,10 +208,10 @@ user-select: none;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      font-size: 18px;
+      font-size: 1em;
       margin-bottom: 70px;
       background-color: #00000000;
-      transition: background-color 0.5s ease-in;
+      transition: background-color 1.0s ease-in;
 }
 
 .experience-section {
@@ -214,14 +219,16 @@ user-select: none;
       align-items: flex-start;
       border-radius: 8px;
       justify-content: flex-start;
-      font-size: 18px;
+      font-size: 1em;
       gap: 40px 0px;
+      width: 100%;
       margin-bottom: 70px;
       background-color: #00000000;
-      transition: background-color 0.5s ease-in;
+      transition: background-color 1.0s ease-in;
 }
 
 .exp-row {
+      width: 100%;
       flex-direction: row;
       align-items: flex-start;
       justify-content: flex-start;
@@ -230,11 +237,12 @@ user-select: none;
 }
 
 .position-date {
+      padding-right: 8px;
       width: 27%; 
       color: #D3C6AA99;
       /* opacity: 60%; */
       font-weight: 500;
-      font-size: 14px;
+      font-size: 0.8em;
       position: relative;
       top: 4px;
       background-color: #00000000;
@@ -249,12 +257,13 @@ user-select: none;
 }
 
       .position-title {
+            font-size: 1em;
             font-weight: 500;
       background-color: #00000000;
       }
 
       .position-descr {
-            font-size: 16px;
+            font-size: 1em;
       color: #D3C6AA99;
       /* opacity: 60%; */
       background-color: #00000000;
@@ -267,12 +276,12 @@ user-select: none;
       justify-content: flex-start;
       border-radius: 8px;
       background-color: #00000000;
-      transition: background-color 0.5s ease-in;
+      transition: background-color 1.0s ease-in;
+      font-size: 1em;
 }
 
 .projects-section {
       padding: 10px;
-      margin-bottom: 70px;
 }
 
 .proj-row {
@@ -310,88 +319,168 @@ user-select: none;
 }
 
 
-
-
-
-
-
-
-
  /* ---------- MEDIA QUERIES */
 
 
 @media ( max-width: 1583px ){
-.name {
-      font-size: 45px;
-      font-weight: 700;
-}
-}
-@media ( max-width: 1369px ){
-
-.name {
-      font-size: 38px;
-      font-weight: 700;
+.left-box {
+      font-size: 0.75rem;
 }
 
-.occupation-box {
-      /* padding: 15px 0px; */
+.right-box-wrapper {
+      font-size: 0.90rem;
 }
 
-.occupation {
-      font-size: 24px;
-      font-weight: 500;
+.occupation-box{
 }
 
-.occupation-descr {
-      font-size: 18px;
-      font-weight: 400;
-      color: #D3C6AA99;
-      /* opacity: 60%; */
-}
 
 .topics-box {
-      /* padding: 25px 0px; */
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
 }
 
 .topics {
-      font-size: 18px;
-      font-weight: 500;
-      /* padding: 8px 0; */
-      font-style: italic;
 }
 
 .social-networks {
-      /* padding: 15px 0px; */
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      font-size: 35px;
-      
 }
 
 .social-icon {
-      margin-right: 15px;
-}
 }
 
-@media ( max-width: 1160px ){
+}
+
+.hide-on-desktop {
+      display: none;
+}
+
+@media ( max-width: 1200px ){
+
+.hide-on-desktop {
+      display: block;
+}
+
+.main-box{
+      display: block;
+      overflow-y: scroll;
+      width: 80vw;
+      margin: auto;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.main-box::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.main-box {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.left-box {
+      width: 100%;
+      height: auto;
+      margin-top: 40px;
+      margin-bottom: 40px;
+}
+
+.mid-box {
+      display: none;
+}
+
+.right-box {
+      height: auto;
+      width: 100%;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.right-box-wrapper {
+      width: 100%;
+}
+
+
+.occupation {
+}
+
+.occupation-descr {
+}
+
+.topics-box {
+      display: none;
+}
+
+.topics {
+}
+
+.social-networks {
+}
+
+.social-icon {
+}
+
+}
+
+@media ( max-width: 768px ){
+
+      .main-box{
+            width: 95vw;
+      }
+
+
+}
+
+
+@media ( max-width: 430px ){
+
+
 .name {
-      font-size: 30px;
-      font-weight: 700;
+      font-size: 2.8em;
 }
+
+.occupation {
 }
+
+.occupation-descr {
+}
+
+.topics-box {
+}
+
+.topics {
+}
+
+.social-networks {
+}
+
+.social-icon {
+}
+
+}
+
+
 @media ( max-width: 1369px ){
 
-.main-box {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      width: 100vw;
-      /* padding: 40vh 10vw; */
-      overflow: hidden
+.name {
 }
+
+.occupation {
+}
+
+.occupation-descr {
+}
+
+.topics-box {
+}
+
+.topics {
+}
+
+.social-networks {
+}
+
+.social-icon {
+}
+
+}
+
 }
