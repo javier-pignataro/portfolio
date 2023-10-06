@@ -7,7 +7,7 @@ user-select: none;
       box-sizing: border-box;
       font-family: 'Bai Jamjuree', sans-serif;
       color: #D3C6AA;
-      background-color: #333333;
+      background-color: #33333300;
 }
 
 .flex {
@@ -20,7 +20,19 @@ user-select: none;
       justify-content: center;
       height: 100vh;
       width: 100vw;
-      overflow: hidden
+      overflow: hidden;
+      background-image: url( "/img/fondo-portfolio.mp4" );
+      background-repeat:no-repeat;
+      background-size: 100%;
+      
+}
+
+#background-video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      object-fit: cover;
 }
 
 .left-box {
@@ -77,6 +89,8 @@ user-select: none;
       /* z-index: -30; */
       width: 26.6vw;
       top: 0px;
+      background-color: #00000000;
+      transition: background-color 0.5s ease-in;
 }
 
 /* .right-box.shifting{ */
@@ -105,7 +119,8 @@ user-select: none;
 .occupation-descr {
       font-size: 18px;
       font-weight: 400;
-      opacity: 60%;
+      color: #D3C6AA99
+      /* opacity: 60%; */
 }
 
 .topics-box {
@@ -118,8 +133,11 @@ user-select: none;
 .wrapper-topics {
       width: 100%;
       background-color: rgba( 0, 0, 0, 0.0 );
-      transition: background-color 0.5s ease-in;
       border-radius: 8px;
+}
+
+.noanimation {
+      animation: none;
 }
 
 .notransition {
@@ -174,22 +192,32 @@ user-select: none;
       padding: 10px;
 }
 
+.experience-section > *,
+.about-section > *,
+.projects-section > * {
+      background-color: #00000000;
+}
+
 .about-section {
+      border-radius: 8px;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
       font-size: 18px;
       margin-bottom: 70px;
+      background-color: #00000000;
       transition: background-color 0.5s ease-in;
 }
 
 .experience-section {
       flex-direction: column;
       align-items: flex-start;
+      border-radius: 8px;
       justify-content: flex-start;
       font-size: 18px;
       gap: 40px 0px;
       margin-bottom: 70px;
+      background-color: #00000000;
       transition: background-color 0.5s ease-in;
 }
 
@@ -198,15 +226,18 @@ user-select: none;
       align-items: flex-start;
       justify-content: flex-start;
       /* margin-bottom: 30px; */
+      background-color: #00000000;
 }
 
 .position-date {
       width: 27%; 
-      opacity: 40%;
+      color: #D3C6AA99;
+      /* opacity: 60%; */
       font-weight: 500;
       font-size: 14px;
       position: relative;
       top: 4px;
+      background-color: #00000000;
 }
 
 .position {
@@ -214,15 +245,19 @@ user-select: none;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
+      background-color: #00000000;
 }
 
       .position-title {
             font-weight: 500;
+      background-color: #00000000;
       }
 
       .position-descr {
             font-size: 16px;
-            opacity: 60%;
+      color: #D3C6AA99;
+      /* opacity: 60%; */
+      background-color: #00000000;
       }
 
 
@@ -230,6 +265,8 @@ user-select: none;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
+      border-radius: 8px;
+      background-color: #00000000;
       transition: background-color 0.5s ease-in;
 }
 
@@ -244,10 +281,14 @@ user-select: none;
       align-items: flex-start;
       justify-content: flex-start;
       margin-bottom: 30px;
+      background-color: #00000000;
+      transition:inherit ;
 }
 
 .proj-title {
       width: 60%;
+      background-color: #00000000;
+      transition:inherit ;
 }
 
 .proj-img {
@@ -255,6 +296,8 @@ user-select: none;
       height: 12vh;
       border-radius: 12px;
       overflow: hidden;
+      background-color: #00000000;
+      transition:inherit ;
 }
 
 .proj-img img {
@@ -262,6 +305,8 @@ user-select: none;
       object-position: 50% 50%;
       width: 100%;
       height: 12vh;
+      background-color: #00000000;
+      transition:inherit ;
 }
 
 
@@ -300,7 +345,8 @@ user-select: none;
 .occupation-descr {
       font-size: 18px;
       font-weight: 400;
-      opacity: 60%;
+      color: #D3C6AA99;
+      /* opacity: 60%; */
 }
 
 .topics-box {
