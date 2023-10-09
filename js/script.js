@@ -52,8 +52,25 @@ function initialice()
             if( desktop ){
                   resetDesktopVariables();
             }
+
+            // When the user scrolls the page, execute myFunction
+            // window.onscroll = myFunction;
+            window.addEventListener( "scroll", myFunction );
+
+            // Get the navbar
+            var navbar = document.getElementById("only-for-test");
+            console.log( navbar );
+
+            let sticky = navbar.offsetTop;
+            console.log( sticky );
       }
 
+      function myFunction()
+      {
+            console.log( "hola" );
+            sticky = navbar.offsetTop;
+            console.log( sticky );
+      }
 
       function resetDesktopVariables()
       {
@@ -325,7 +342,7 @@ function initialice()
             };
 
             // Execute function every 50ms
-            scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 50);
+            scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 100);
             scrollingTimingInterval = window.setInterval( scrollingWindow, 900);
 
             console.log( section0 );
@@ -412,7 +429,7 @@ function initialice()
             // Predetermine the total amount of Y-Offset to increment/decrement
             // let totalVelocity = velocityAcumulator + 120;
             // velocityAcumulator += 120;
-            velocityAcumulator < 250 ? velocityAcumulator += 50 : false;
+            velocityAcumulator < 300 ? velocityAcumulator += 100 : false;
 
             // Remove Topics CLicks
             topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );
