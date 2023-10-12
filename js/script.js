@@ -35,41 +35,87 @@ function initialice()
       // Object for desktop topic functionality
       let topicsProps;
 
+
+      // Variables for mobile
+      let mobileVariables = {
+            mainBox : null,
+            leftBox: null,
+            rightBox: null,
+            navbar : null,
+            stick : null,
+            totalTopicOffsetY: null,
+      };
+
+      // _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ -
+
+            // Runtime
       let x = window.matchMedia("(max-width: 1200px)")
       responsiveListener(x) // Call listener function at run time
-      x.addListener(responsiveListener) // Attach listener function on state changes
+      // x.addListener(responsiveListener) // Attach listener function on state changes
 
-      function responsiveListener(x) {
-            if (x.matches) { // If media query matches
-                  responsiveMobile();
-            } else {
-                  responsiveDesktop();
+      // window.addEventListener( "resize", responsiveListener );
+      //
+
+
+            function responsiveListener(x) {
+                  if ( x.matches ) { // If media query matches
+                        responsiveMobile();
+                  } else {
+                        responsiveDesktop();
+                  }
             }
-      }
 
       function responsiveMobile()
       {
-            if( desktop ){
-                  resetDesktopVariables();
-            }
 
             // When the user scrolls the page, execute myFunction
             // window.onscroll = myFunction;
-            window.addEventListener( "scroll", myFunction );
+            // window.addEventListener( "scroll", myFunction );
+            mobileVariables.mainBox = document.querySelector( ".main-box" );
+            mobileVariables.leftBox = document.querySelector( ".left-box" );
+            mobileVariables.rightBox = document.querySelector( ".right-box" );
 
             // Get the navbar
-            var navbar = document.getElementById("only-for-test");
-            console.log( navbar );
+            mobileVariables.navbar = document.getElementById("only-for-test");
+            mobileVariables.sticky = mobileVariables.navbar.offsetTop;
 
-            let sticky = navbar.offsetTop;
-            console.log( sticky );
+            mobileVariables.mainBox.addEventListener( "scroll", myFunction );
+
+            mobileVariables.totalTopicOffsetY =
+                  + parseInt(window.getComputedStyle(mobileVariables.mainBox).getPropertyValue("padding-top").slice(0, -2))
+                  + parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-top").slice(0, -2))
+                  + mobileVariables.leftBox.clientHeight
+                  + parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-bottom").slice(0, -2))
+            ;
+
+            console.log( mobileVariables.totalTopicOffsetY );
+            // console.log( 
+            //         parseInt(window.getComputedStyle(mobileVariables.mainBox).getPropertyValue("padding-top").slice(0, -2))
+            //       , parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-top").slice(0, -2))
+            //       , mobileVariables.leftBox.clientHeight
+            //       , parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-bottom").slice(0, -2))
+            // );
+
       }
 
       function myFunction()
       {
-            console.log( "hola" );
-            sticky = navbar.offsetTop;
-            console.log( sticky );
+            console.warn( "SCROLL ON MOBILE" );
+            console.log( " mainBox.scrollTop ---> " + mobileVariables.mainBox.scrollTop);
+            console.log( " mainBox.offsetTop ---> " + mobileVariables.mainBox.offsetTop);
+            console.log( " navbar.offsetTop ---> " + mobileVariables.navbar.offsetTop );
+            console.log( " navbar.scrollY ---> " + mobileVariables.navbar.scrollY );
+
+            if( mobileVariables.mainBox.scrollTop >= mobileVariables.totalTopicOffsetY ){
+                  mobileVariables.navbar.classList.add("sticky")
+                  console.log( mobileVariables.rightBox );
+            } else {
+                  mobileVariables.navbar.classList.remove("sticky");
+                  console.log( mobileVariables.rightBox );
+            }
+
+            // sticky = navbar.offsetTop;
+            // console.log( sticky );
       }
 
       function resetDesktopVariables()
