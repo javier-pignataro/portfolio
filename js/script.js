@@ -79,7 +79,7 @@ function initialice()
             mobileVariables.navbar = document.getElementById("only-for-test");
             mobileVariables.sticky = mobileVariables.navbar.offsetTop;
 
-            mobileVariables.mainBox.addEventListener( "scroll", myFunction );
+            // mobileVariables.mainBox.addEventListener( "scroll", myFunction );
 
             mobileVariables.totalTopicOffsetY =
                   + parseInt(window.getComputedStyle(mobileVariables.mainBox).getPropertyValue("padding-top").slice(0, -2))
