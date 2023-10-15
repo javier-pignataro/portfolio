@@ -18,13 +18,15 @@
       height: 100vh;
       width: 100vw;
       overflow: hidden;
-      background-image: url( "/img/fondo-portfolio.mp4" );
+      background-image: url( "/img/video-poster.png" );
+      background-position:center;
+      background-size:cover;
       background-repeat:no-repeat;
-      background-size: 100%;
 
 }
 
 #background-video {
+      display: none;
       position: absolute;
       width: 100%;
       height: 100%;
@@ -431,6 +433,20 @@
             width: 140px;
             height: 79px;
       }
+
+      .about-section {
+            margin-top: 15px;
+      }
+
+
+      .experience-section {
+            margin-top: 15px;
+      }
+
+      .projects-section {
+            margin-top: 15px;
+      }
+
 }
 
 @media screen and ( max-width: 768px ){
