@@ -3,7 +3,7 @@
   --brighter-main-fg-color: #f0f0ff;
   --main-fg-opacity-color: #e4e3ff55;
   --main-bg-color: #c0bdfc;
-  --mobile-main-bg-topics-color: #c0bdfc22;
+  --mobile-main-bg-topics-color: #5b5a7855;
   --transparent: #00000000;
 }
 
@@ -430,7 +430,7 @@
             padding: 10px;
             font-weight: 600;
             background-color: var( --mobile-main-bg-topics-color );
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
             z-index: 1;
       }
 
