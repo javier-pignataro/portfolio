@@ -90,11 +90,11 @@ function initialice()
 
             console.log( mobileVariables.totalTopicOffsetY );
             // console.log( 
-            //         parseInt(window.getComputedStyle(mobileVariables.mainBox).getPropertyValue("padding-top").slice(0, -2))
-            //       , parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-top").slice(0, -2))
-            //       , mobileVariables.leftBox.clientHeight
-            //       , parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-bottom").slice(0, -2))
-            // );
+                  //         parseInt(window.getComputedStyle(mobileVariables.mainBox).getPropertyValue("padding-top").slice(0, -2))
+                  //       , parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-top").slice(0, -2))
+                  //       , mobileVariables.leftBox.clientHeight
+                  //       , parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-bottom").slice(0, -2))
+                  // );
 
       }
 
@@ -179,6 +179,13 @@ function initialice()
                   last: null,
                   currentSelected: null,
                   lastSelected: null,
+                  mainFgColor: "#e4e3ff",
+                  brighterMainFgColor: "#f0f0ff",
+                  mainFgOpacityColor: "#e4e3ff55",
+                  mainBgColor: "#c0bdfc",
+                  mainBgOpacityColor1: "#c0bdfc99",
+                  mainBgOpacityColor2: "#c0bdfc33",
+                  transparent: "#00000000",
 
                   topicsIndex: [
                         topic0,
@@ -236,10 +243,10 @@ function initialice()
                               // Deselect background
                               // this.lastSelected.classList.add('notransition');
                               this.topicsIndex[this.lastSelected].style.transition = "none";
-                              this.topicsIndex[this.lastSelected].style.backgroundColor = "#dbbc7f00";
+                              this.topicsIndex[this.lastSelected].style.backgroundColor = this.transparent;
                               this.topicsIndex[this.lastSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
                               this.topicsChildrenIndex[this.lastSelected].style.fontWeight = "400";
-                              this.topicsChildrenIndex[this.lastSelected].style.color = "#D3C6AA";
+                              this.topicsChildrenIndex[this.lastSelected].style.color = this.mainFgColor;
                         }
 
                         // Shift 
@@ -247,12 +254,12 @@ function initialice()
                         // Select BG
                         // this.topicsIndex[this.currentSelected].classList.add('notransition');
                         this.topicsIndex[this.currentSelected].style.transition = "none";
-                        this.topicsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f99";
+                        this.topicsIndex[this.currentSelected].style.backgroundColor = this.mainBgOpacityColor1;
                         this.topicsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
                         this.topicsIndex[this.currentSelected].style.transition = "background-color 1.0s ease-in";
-                        this.topicsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f33";
+                        this.topicsIndex[this.currentSelected].style.backgroundColor = this.mainBgOpacityColor2;
                         this.topicsChildrenIndex[this.currentSelected].style.fontWeight = "900";
-                        this.topicsChildrenIndex[this.currentSelected].style.color = "#ffefcc";
+                        this.topicsChildrenIndex[this.currentSelected].style.color = this.brighterMainFgColor;
 
                         // setTimeout(
                               //       ()=>
@@ -278,7 +285,7 @@ function initialice()
                         this.current = i;
                         if( this.current !== this.currentSelected ) {
                               this.topicsChildrenIndex[this.current].style.fontWeight = "900";
-                              this.topicsChildrenIndex[this.current].style.color = "#ffefcc";
+                              this.topicsChildrenIndex[this.current].style.color = this.brighterMainFgColor;
                         }
                   },
 
@@ -286,7 +293,7 @@ function initialice()
                   {
                         if( this.current !== this.currentSelected ) {
                               this.topicsChildrenIndex[this.current].style.fontWeight = "400";
-                              this.topicsChildrenIndex[this.current].style.color = "#D3C6AA";
+                              this.topicsChildrenIndex[this.current].style.color = this.mainFgColor;
                         }
                   },
 
@@ -319,17 +326,17 @@ function initialice()
                               // Last selected
                               if( this.currentSelected != null ){
                                     this.topicSectionsIndex[this.lastSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                                    this.topicSectionsIndex[this.lastSelected].style.backgroundColor = "#dbbc7f00";
+                                    this.topicSectionsIndex[this.lastSelected].style.backgroundColor = this.transparent;
                               }
 
                               // current selected --> < i >
                                     this.topicSectionsIndex[this.currentSelected].style.transition = "none";
                               this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                              this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f33";
+                              this.topicSectionsIndex[this.currentSelected].style.backgroundColor = this.mainBgOpacityColor2;
                               this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
                               this.topicSectionsIndex[this.currentSelected].style.transition = "background-color 1.0s ease-in";
                               this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                              this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f00";
+                              this.topicSectionsIndex[this.currentSelected].style.backgroundColor = this.transparent;
 
                               // Align
                               console.log( this.topicSectionsLimitPixels );
