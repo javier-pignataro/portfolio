@@ -37,85 +37,32 @@ function initialice()
 
 
       // Variables for mobile
-      let mobileVariables = {
-            mainBox : null,
-            leftBox: null,
-            rightBox: null,
-            navbar : null,
-            stick : null,
-            totalTopicOffsetY: null,
-      };
+      // let mobileVariables = {
+      //       mainBox : null,
+      //       leftBox: null,
+      //       rightBox: null,
+      //       navbar : null,
+      //       stick : null,
+      //       totalTopicOffsetY: null,
+      // };
 
       // _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ -
 
-            // Runtime
+      // Runtime
       let x = window.matchMedia("(max-width: 1200px)")
       responsiveListener(x) // Call listener function at run time
-      // x.addListener(responsiveListener) // Attach listener function on state changes
 
-      // window.addEventListener( "resize", responsiveListener );
-      //
-
-
-            function responsiveListener(x) {
-                  if ( x.matches ) { // If media query matches
-                        responsiveMobile();
-                  } else {
-                        responsiveDesktop();
-                  }
+      function responsiveListener(x) {
+            if ( x.matches ) { // If media query matches
+                  responsiveMobile();
+            } else {
+                  responsiveDesktop();
             }
+      }
 
       function responsiveMobile()
       {
-
-            // When the user scrolls the page, execute myFunction
-            // window.onscroll = myFunction;
-            // window.addEventListener( "scroll", myFunction );
-            mobileVariables.mainBox = document.querySelector( ".main-box" );
-            mobileVariables.leftBox = document.querySelector( ".left-box" );
-            mobileVariables.rightBox = document.querySelector( ".right-box" );
-
-            // Get the navbar
-            mobileVariables.navbar = document.getElementById("only-for-test");
-            mobileVariables.sticky = mobileVariables.navbar.offsetTop;
-
-            // mobileVariables.mainBox.addEventListener( "scroll", myFunction );
-
-            mobileVariables.totalTopicOffsetY =
-                  + parseInt(window.getComputedStyle(mobileVariables.mainBox).getPropertyValue("padding-top").slice(0, -2))
-                  + parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-top").slice(0, -2))
-                  + mobileVariables.leftBox.clientHeight
-                  + parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-bottom").slice(0, -2))
-            ;
-
-            console.log( mobileVariables.totalTopicOffsetY );
-            // console.log( 
-                  //         parseInt(window.getComputedStyle(mobileVariables.mainBox).getPropertyValue("padding-top").slice(0, -2))
-                  //       , parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-top").slice(0, -2))
-                  //       , mobileVariables.leftBox.clientHeight
-                  //       , parseInt(window.getComputedStyle(mobileVariables.leftBox).getPropertyValue("margin-bottom").slice(0, -2))
-                  // );
-
-      }
-
-      function myFunction()
-      {
-            console.warn( "SCROLL ON MOBILE" );
-            console.log( " mainBox.scrollTop ---> " + mobileVariables.mainBox.scrollTop);
-            console.log( " mainBox.offsetTop ---> " + mobileVariables.mainBox.offsetTop);
-            console.log( " navbar.offsetTop ---> " + mobileVariables.navbar.offsetTop );
-            console.log( " navbar.scrollY ---> " + mobileVariables.navbar.scrollY );
-
-            if( mobileVariables.mainBox.scrollTop >= mobileVariables.totalTopicOffsetY ){
-                  mobileVariables.navbar.classList.add("sticky")
-                  console.log( mobileVariables.rightBox );
-            } else {
-                  mobileVariables.navbar.classList.remove("sticky");
-                  console.log( mobileVariables.rightBox );
-            }
-
-            // sticky = navbar.offsetTop;
-            // console.log( sticky );
+            // Nothing yet
       }
 
       function resetDesktopVariables()
@@ -226,22 +173,11 @@ function initialice()
                         this.lastSelected = this.currentSelected;
                         this.currentSelected = i;
 
-                        // Remove event listeners
-                        // topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );
-                        // topicsProps.topicsIndex[1].removeEventListener( "click", clickOnTopics );
-                        // topicsProps.topicsIndex[2].removeEventListener( "click", clickOnTopics );
-
-                        console.log( "CURRENT" + i );
-                        console.log( "lastSelected" + this.lastSelected );
-                        console.log( "currentSelected" + this.currentSelected );
-
-
                         // If I have a previous selected element
                         if( this.lastSelected !== null ){ // Shift back
                               // Shift Back
                               this.topicsChildrenIndex[this.lastSelected].style.left = "0px";
                               // Deselect background
-                              // this.lastSelected.classList.add('notransition');
                               this.topicsIndex[this.lastSelected].style.transition = "none";
                               this.topicsIndex[this.lastSelected].style.backgroundColor = this.transparent;
                               this.topicsIndex[this.lastSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
@@ -251,8 +187,7 @@ function initialice()
 
                         // Shift 
                         this.topicsChildrenIndex[this.currentSelected].style.left = "5%";
-                        // Select BG
-                        // this.topicsIndex[this.currentSelected].classList.add('notransition');
+                        // Select BG, FontWeight and Color
                         this.topicsIndex[this.currentSelected].style.transition = "none";
                         this.topicsIndex[this.currentSelected].style.backgroundColor = this.mainBgOpacityColor1;
                         this.topicsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
@@ -260,16 +195,6 @@ function initialice()
                         this.topicsIndex[this.currentSelected].style.backgroundColor = this.mainBgOpacityColor2;
                         this.topicsChildrenIndex[this.currentSelected].style.fontWeight = "900";
                         this.topicsChildrenIndex[this.currentSelected].style.color = this.brighterMainFgColor;
-
-                        // setTimeout(
-                              //       ()=>
-                              //       {
-                                    //             topicsProps.topicsIndex[0].addEventListener( "click", clickOnTopics );
-                                    //             topicsProps.topicsIndex[1].addEventListener( "click", clickOnTopics );
-                                    //             topicsProps.topicsIndex[2].addEventListener( "click", clickOnTopics );
-                                    //       },
-                              //       8000
-                              // )
 
                         // If ev is not null, the alignNBlink function is executed 
                         if( ev ){
@@ -301,22 +226,6 @@ function initialice()
                   {
 
                         if( !ev ){ // if 'ev' is null. This function is invoked after the <select> function
-
-                              // // Clear selecting trigger by offset changes
-                              // clearInterval(rBoxInterv);
-
-                              // Move and Blink section ( without selecting topic )
-                              // rightBoxWrapper.classList.remove( "noanimation" );
-                              //
-
-                                    // console.log( animationUp + animationDown );
-                              // try{
-                                    //       animationUp.cancel();
-                                    //       animationDown.cancel();
-                                    // } catch {
-                                          //       console.warn( "no animatin ongoing" );
-                                          // }
-
                               rightBoxWrapper.style.animation = "none";
                               rightBoxWrapper.offsetTop;
 
@@ -339,7 +248,6 @@ function initialice()
                               this.topicSectionsIndex[this.currentSelected].style.backgroundColor = this.transparent;
 
                               // Align
-                              console.log( this.topicSectionsLimitPixels );
                               rightBoxWrapper.animate(
                                     {
                                           top: `${-this.topicSectionsLimitPixels[i]}px` // Scroll Up
@@ -350,43 +258,13 @@ function initialice()
                                           easing: "ease",
                                     }
                               ).addEventListener( "finish", restoreOnWheelListener );
-
-                              // setTimeout(() => {
-                                    //       rBoxInterv = window.setInterval( selectByOffset, 50);
-                                    // }, "800");
-
-
-                        } 
-                        else { // if 'ev' is true. This function is invoked after the <tellScroll> function
+                        } else { // if 'ev' is true. This function is invoked after the <tellScroll> function
                               if( true ){
                                     if( this.currentSelected == i ){
                                     }
                                     if( this.currentSelected != i ){
-                                          console.log( "CURRENT SELECTED : : : : " + i );
-                                          console.log( ev );
-                                          // Blink Section ( select topic )
-
-                                          // BLink
-                                          // Last selected
-                                          // if( this.currentSelected != null ){
-                                                //       this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                                                //       this.topicSectionsIndex[this.currentSelected].style.backgroundColor = "#dbbc7f00";
-                                                // }
-                                          //
-                                                // // current selected --> < i >
-                                                // this.topicSectionsIndex[i].style.transition = "none";
-                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                                          // this.topicSectionsIndex[i].style.backgroundColor = "#dbbc7f33";
-                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                                          // this.topicSectionsIndex[i].style.transition = "background-color 0.5s ease-in";
-                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
-                                          // this.topicSectionsIndex[i].style.backgroundColor = "#dbbc7f00";
-
-
-
                                           // Select TOpic
                                           this.select( null, i );
-                                          console.log( "Select this: : : : " + i );
                                     }
                               }
 
@@ -398,15 +276,9 @@ function initialice()
             scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 100);
             scrollingTimingInterval = window.setInterval( scrollingWindow, 900);
 
-            console.log( section0 );
-            // section0.style.backgroundColor = "#dbbc7f99";
-
             // Hover
             topics = document.querySelectorAll( '.topics' );
             wrapperTopics = document.querySelectorAll( '.wrapper-topics' );
-
-            // console.log(topics);
-            // console.log(wrapperTopics);
 
             // Topics Listeners
             topicsProps.topicsIndex[0].addEventListener( "mouseenter", (ev)=>{ topicsProps.colorMarkOn( ev, 0 ); } );
@@ -436,7 +308,6 @@ function initialice()
 
       function selectByOffset(ev)
       {
-            console.log( "hola papeh. ANIMATION END --> <><> <><>" );
             currentScrollPos = rightBoxWrapper.offsetTop;
             if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[0] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[1] )
                   topicsProps.alignNBlink( true, 0 );
@@ -469,7 +340,6 @@ function initialice()
 
       function velocityDecrementFunction()
       {
-            // console.log( "velocity" + velocityAcumulator );
             velocityAcumulator ? velocityAcumulator -= 50 : false;
       }
 
@@ -477,11 +347,9 @@ function initialice()
       {
             // The actual Y-Offset of the right box 
             currentScrollPos = rightBoxWrapper.offsetTop;
-            console.log( currentScrollPos );
-            console.log( ev.deltaY );
+
+
             // Predetermine the total amount of Y-Offset to increment/decrement
-            // let totalVelocity = velocityAcumulator + 120;
-            // velocityAcumulator += 120;
             velocityAcumulator < 300 ? velocityAcumulator += 100 : false;
 
             // Remove Topics CLicks
@@ -507,11 +375,8 @@ function initialice()
                         }
                   );
                   animationDown.addEventListener( "finish", selectByOffset );
-                  // console.log( rightBoxWrapper.offsetTop );
             } else {
-                  // console.log( rightBoxWrapper.offsetTop );
                   let amount = (currentScrollPos + velocityAcumulator) >= 0 ? 0 : (currentScrollPos + velocityAcumulator);
-                  // console.log( `Amount: ${amount}` );
                   animationUp = rightBoxWrapper.animate(
                         {
                               top: `${amount}px` // Scroll Up
@@ -523,7 +388,6 @@ function initialice()
                         }
                   );
                   animationUp.addEventListener( "finish", selectByOffset );
-                  // console.log( rightBoxWrapper.offsetTop );
             }
       }
 

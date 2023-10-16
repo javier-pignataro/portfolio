@@ -3,6 +3,7 @@
   --brighter-main-fg-color: #f0f0ff;
   --main-fg-opacity-color: #e4e3ff55;
   --main-bg-color: #c0bdfc;
+  --mobile-main-bg-topics-color: #c0bdfc22;
   --transparent: #00000000;
 }
 
@@ -308,6 +309,7 @@
 }
 
 .proj-title {
+      width: 50%;
       background-color: var( --transparent );
       transition: inherit;
       font-weight: inherit;
@@ -427,7 +429,7 @@
       .mobile-topics-wrapper {
             padding: 10px;
             font-weight: 600;
-            background-color: var( --transparent );
+            background-color: var( --mobile-main-bg-topics-color );
             backdrop-filter: blur(4px);
             z-index: 1;
       }
@@ -451,6 +453,13 @@
 
       .projects-section {
             margin-top: 15px;
+      }
+
+      .proj-row:hover {
+            color: var( --main-bg-color );
+            cursor: none;
+            transform: none;
+            text-decoration: none;
       }
 
 }
