@@ -94,7 +94,7 @@
 
 .name {
       font-size: 3.3125em;
-      font-weight: 700;
+      font-weight: 600;
       border-bottom: 1px solid var( --main-fg-opacity-color );
       margin-bottom: 15px;
 }
@@ -177,9 +177,6 @@
 
 .social-icon-hitbox-link i:hover{
       opacity: 100%;
-}
-
-.social-icon {
 }
 
 .name,
@@ -392,6 +389,12 @@
       }
       .name-border {
             border-bottom: 1px solid var( --main-fg-opacity-color );
+      }
+
+
+      .social-icon-hitbox-link {
+            margin-right: 25px;
+            font-size: 2.3em;
       }
 
       .mid-box {
