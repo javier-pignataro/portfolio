@@ -16,7 +16,6 @@
       box-sizing: border-box;
       font-family: 'Bai Jamjuree', sans-serif;
       color: var(--main-fg-color);
-      background-color: #33333300;
 }
 
 .main-box {
@@ -27,6 +26,7 @@
       height: 100vh;
       width: 100vw;
       overflow: hidden;
+      background-color: #222222;
       background-image: url( "../img/video-poster.png" );
       background-position:center;
       background-size:cover;
