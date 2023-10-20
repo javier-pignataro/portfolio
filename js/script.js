@@ -38,17 +38,17 @@ function initialice()
 
       // Variables for mobile
       // let mobileVariables = {
-      //       mainBox : null,
-      //       leftBox: null,
-      //       rightBox: null,
-      //       navbar : null,
-      //       stick : null,
-      //       totalTopicOffsetY: null,
-      // };
+            //       mainBox : null,
+            //       leftBox: null,
+            //       rightBox: null,
+            //       navbar : null,
+            //       stick : null,
+            //       totalTopicOffsetY: null,
+            // };
 
       // _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ -
 
-      // Runtime
+            // Runtime
       let x = window.matchMedia("(max-width: 1200px)")
       responsiveListener(x) // Call listener function at run time
 
@@ -124,7 +124,7 @@ function initialice()
             topicsProps = {
                   current: null,
                   last: null,
-                  currentSelected: null,
+                  currentSelected: 0,
                   lastSelected: null,
                   mainFgColor: "#e4e3ff",
                   brighterMainFgColor: "#f0f0ff",
@@ -229,7 +229,7 @@ function initialice()
                               rightBoxWrapper.style.animation = "none";
                               rightBoxWrapper.offsetTop;
 
-                              window.removeEventListener( "wheel", tellScroll );
+                              // window.removeEventListener( "wheel", tellScroll );
 
                               // BLink
                               // Last selected
@@ -247,6 +247,10 @@ function initialice()
                               this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
                               this.topicSectionsIndex[this.currentSelected].style.backgroundColor = this.transparent;
 
+                              console.log( "- - click - - " );
+                              clearInterval(scrollingTimingInterval);
+                              console.warn( "clearInterval: " + scrollingTimingInterval );
+
                               // Align
                               rightBoxWrapper.animate(
                                     {
@@ -257,13 +261,31 @@ function initialice()
                                           fill: "forwards",
                                           easing: "ease",
                                     }
-                              ).addEventListener( "finish", restoreOnWheelListener );
+                              ); // .addEventListener( "finish", restoreOnWheelListener );
+
                         } else { // if 'ev' is true. This function is invoked after the <tellScroll> function
                               if( true ){
                                     if( this.currentSelected == i ){
                                     }
                                     if( this.currentSelected != i ){
+
+                                          // Unncomment the 16 lines below if you want sections to blink when wheel is scrolling
                                           // Select TOpic
+                                          // // BLink
+                                          // // Last selected
+                                          // if( this.currentSelected != null && this.lastSelected != null ){
+                                          //       this.topicSectionsIndex[this.lastSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                          //       this.topicSectionsIndex[this.lastSelected].style.backgroundColor = this.transparent;
+                                          // }
+                                          //
+                                          // // current selected --> < i >
+                                          //       this.topicSectionsIndex[i].style.transition = "none";
+                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                          // this.topicSectionsIndex[i].style.backgroundColor = this.mainBgOpacityColor2;
+                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                          // this.topicSectionsIndex[i].style.transition = "background-color 1.0s ease-in";
+                                          // this.topicSectionsIndex[i].offsetHeight; // Trigger a reflow, flushing the CSS changes
+                                          // this.topicSectionsIndex[i].style.backgroundColor = this.transparent;
                                           this.select( null, i );
                                     }
                               }
@@ -274,7 +296,20 @@ function initialice()
 
             // Execute function every 50ms
             scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 100);
-            scrollingTimingInterval = window.setInterval( scrollingWindow, 900);
+            scrollingTimingInterval = window.setInterval( selectByOffset, 900);
+            console.warn( "INERTIA" );
+            console.log( scrollingInertiaInterval );
+            console.log( scrollingInertiaInterval );
+            console.log( scrollingInertiaInterval );
+            console.log( scrollingInertiaInterval );
+            console.log( scrollingInertiaInterval );
+            console.log( scrollingInertiaInterval );
+            console.warn( "SCROLLING TIMING" );
+            console.log( scrollingTimingInterval );
+            console.log( scrollingTimingInterval );
+            console.log( scrollingTimingInterval );
+            console.log( scrollingTimingInterval );
+            console.log( scrollingTimingInterval );
 
             // Hover
             topics = document.querySelectorAll( '.topics' );
@@ -308,7 +343,22 @@ function initialice()
 
       function selectByOffset(ev)
       {
+            // settimeout(
+                  //       ()=>
+                  //       {
+                        //
+                        //       }, 2000
+                  // )
             currentScrollPos = rightBoxWrapper.offsetTop;
+            console.log( "- - scroll - - " );
+            console.log( currentScrollPos );
+            console.log( currentScrollPos );
+            console.log( currentScrollPos );
+            console.log( currentScrollPos );
+            console.log( currentScrollPos );
+            console.log( currentScrollPos );
+            console.log( currentScrollPos );
+            console.log( currentScrollPos );
             if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[0] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[1] )
                   topicsProps.alignNBlink( true, 0 );
             if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[1] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[2] )
@@ -352,13 +402,15 @@ function initialice()
             // Predetermine the total amount of Y-Offset to increment/decrement
             velocityAcumulator < 300 ? velocityAcumulator += 100 : false;
 
-            // Remove Topics CLicks
-            topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );
-            topicsProps.topicsIndex[1].removeEventListener( "click", clickOnTopics );
-            topicsProps.topicsIndex[2].removeEventListener( "click", clickOnTopics );
+            // // Remove Topics CLicks
+            // topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );
+            // topicsProps.topicsIndex[1].removeEventListener( "click", clickOnTopics );
+            // topicsProps.topicsIndex[2].removeEventListener( "click", clickOnTopics );
 
             // Start scrollingWindowTimer
-            scrollingWindowTimer = 1;
+            // scrollingWindowTimer = 1;
+            clearInterval(scrollingTimingInterval);
+            scrollingTimingInterval = window.setInterval( selectByOffset, 900);
 
             // Up or Down scrolling
             if( ev.deltaY > 0 ){
@@ -374,7 +426,7 @@ function initialice()
                               easing: "ease",
                         }
                   );
-                  animationDown.addEventListener( "finish", selectByOffset );
+                  // animationDown.addEventListener( "finish", selectByOffset );
             } else {
                   let amount = (currentScrollPos + velocityAcumulator) >= 0 ? 0 : (currentScrollPos + velocityAcumulator);
                   animationUp = rightBoxWrapper.animate(
@@ -387,7 +439,7 @@ function initialice()
                               easing: "ease",
                         }
                   );
-                  animationUp.addEventListener( "finish", selectByOffset );
+                  // animationUp.addEventListener( "finish", selectByOffset );
             }
       }
 
