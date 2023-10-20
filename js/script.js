@@ -247,9 +247,8 @@ function initialice()
                               this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
                               this.topicSectionsIndex[this.currentSelected].style.backgroundColor = this.transparent;
 
-                              console.log( "- - click - - " );
+                              // Clear the pool of rightBoxWrapper position
                               clearInterval(scrollingTimingInterval);
-                              console.warn( "clearInterval: " + scrollingTimingInterval );
 
                               // Align
                               rightBoxWrapper.animate(
@@ -297,19 +296,6 @@ function initialice()
             // Execute function every 50ms
             scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 100);
             scrollingTimingInterval = window.setInterval( selectByOffset, 900);
-            console.warn( "INERTIA" );
-            console.log( scrollingInertiaInterval );
-            console.log( scrollingInertiaInterval );
-            console.log( scrollingInertiaInterval );
-            console.log( scrollingInertiaInterval );
-            console.log( scrollingInertiaInterval );
-            console.log( scrollingInertiaInterval );
-            console.warn( "SCROLLING TIMING" );
-            console.log( scrollingTimingInterval );
-            console.log( scrollingTimingInterval );
-            console.log( scrollingTimingInterval );
-            console.log( scrollingTimingInterval );
-            console.log( scrollingTimingInterval );
 
             // Hover
             topics = document.querySelectorAll( '.topics' );
@@ -350,15 +336,6 @@ function initialice()
                         //       }, 2000
                   // )
             currentScrollPos = rightBoxWrapper.offsetTop;
-            console.log( "- - scroll - - " );
-            console.log( currentScrollPos );
-            console.log( currentScrollPos );
-            console.log( currentScrollPos );
-            console.log( currentScrollPos );
-            console.log( currentScrollPos );
-            console.log( currentScrollPos );
-            console.log( currentScrollPos );
-            console.log( currentScrollPos );
             if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[0] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[1] )
                   topicsProps.alignNBlink( true, 0 );
             if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[1] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[2] )
@@ -409,6 +386,8 @@ function initialice()
 
             // Start scrollingWindowTimer
             // scrollingWindowTimer = 1;
+
+            // Clear and aplying the pooling of rightBoxWrapper position ( the timer of 900ms forbids multiple selections at wheel scrolling )
             clearInterval(scrollingTimingInterval);
             scrollingTimingInterval = window.setInterval( selectByOffset, 900);
 
