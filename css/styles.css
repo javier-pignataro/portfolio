@@ -18,6 +18,56 @@
       color: var(--main-fg-color);
 }
 
+#briefcase {
+}
+
+.briefcase-absolute {
+      position: absolute;
+      top: 0px;
+      /* background-image: url( "../img/briefcase-unlocking/briefcase-00.png" ); */
+      background-size: cover;
+      width: 100vw;
+      height: 100vh;
+}
+
+      #briefcase-locked-status-00 {
+            background-image: url( "../img/briefcase-unlocking/briefcase-00.png" );
+            z-index: 3;
+      }
+      #briefcase-locked-status-01 {
+            background-image: url( "../img/briefcase-unlocking/briefcase-01.png" );
+            z-index: 2;
+      }
+      #briefcase-locked-status-10 {
+            background-image: url( "../img/briefcase-unlocking/briefcase-10.png" );
+            z-index: 2;
+      }
+      #briefcase-locked-status-11 {
+            background-image: url( "../img/briefcase-unlocking/briefcase-11.png" );
+            z-index: 2;
+      }
+
+#briefcase-padlocks-hitboxes {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0px;
+      display: flex;
+      flex-direction: row;
+      z-index: 5;
+}
+
+#briefcase-left-padlock {
+      width: 50vw;
+      height: 100vh;
+      border: 1px solid black;
+}
+#briefcase-right-padlock {
+      width: 50vw;
+      height: 100vh;
+      border: 1px solid black;
+}
+
 .main-box {
       display: flex;
       flex-direction: row;

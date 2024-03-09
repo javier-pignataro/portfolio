@@ -319,8 +319,90 @@ function initialice()
             animationUp = null;
             animationDown = null;
 
+            let briefcase = document.getElementById("briefcase");
+            let leftPadlock = document.getElementById("briefcase-left-padlock");
+            let rightPadlock = document.getElementById("briefcase-right-padlock");
 
-      }
+            const briefcaseLockStatus = {
+                  binary: 0b00,
+                  status00: document.getElementById("briefcase-locked-status-00"),
+                  status01: document.getElementById("briefcase-locked-status-01"),
+                  status10: document.getElementById("briefcase-locked-status-10"),
+                  status11: document.getElementById("briefcase-locked-status-11"),
+            }
+
+            console.log(leftPadlock);
+
+            leftPadlock.addEventListener( "click", 
+                  () =>
+                  {
+                        toggleLockStatus(0b10)
+                  }
+            );
+
+            rightPadlock.addEventListener( "click", 
+                  () =>
+                  {
+                        toggleLockStatus(0b01)
+                  }
+            );
+
+            function toggleLockStatus( statusUpdating )
+            {
+                  briefcaseLockStatus.binary = briefcaseLockStatus.binary ^ statusUpdating;
+                  // console.log(statusUpdating);
+                  console.log("%b" ,briefcaseLockStatus.binary);
+                  renderPadLocks();
+                  checkUnlockedBrief();
+            }
+
+            function renderPadLocks()
+            {
+                  if( briefcaseLockStatus.binary == 0b00 ){
+                        // briefcase.style.backgroundImage = "url( '../img/briefcase-unlocking/briefcase-00.png')";
+                        briefcaseLockStatus.status00.style.zIndex = 3;
+                        briefcaseLockStatus.status01.style.zIndex = 2;
+                        briefcaseLockStatus.status10.style.zIndex = 2;
+                        briefcaseLockStatus.status11.style.zIndex = 2;
+                        briefcaseLockStatus.status11.style.offsetHeight
+                        return;
+                  }
+                  if( briefcaseLockStatus.binary == 0b01 ){
+                        // briefcase.style.backgroundImage = "url( '../img/briefcase-unlocking/briefcase-01.png')";
+                        briefcaseLockStatus.status00.style.zIndex = 2;
+                        briefcaseLockStatus.status01.style.zIndex = 3;
+                        briefcaseLockStatus.status10.style.zIndex = 2;
+                        briefcaseLockStatus.status11.style.zIndex = 2;
+                        briefcaseLockStatus.status11.style.offsetHeight
+                        return;
+                  }
+                  if( briefcaseLockStatus.binary == 0b10 ){
+                        // briefcase.style.backgroundImage = "url( '../img/briefcase-unlocking/briefcase-10.png')";
+                        briefcaseLockStatus.status00.style.zIndex = 2;
+                        briefcaseLockStatus.status01.style.zIndex = 2;
+                        briefcaseLockStatus.status10.style.zIndex = 3;
+                        briefcaseLockStatus.status11.style.zIndex = 2;
+                        briefcaseLockStatus.status11.style.offsetHeight
+                        return;
+                  }
+                  if( briefcaseLockStatus.binary == 0b11 ){
+                        // briefcase.style.backgroundImage = "url( '../img/briefcase-unlocking/briefcase-11.png')";
+                        briefcaseLockStatus.status00.style.zIndex = 2;
+                        briefcaseLockStatus.status01.style.zIndex = 2;
+                        briefcaseLockStatus.status10.style.zIndex = 2;
+                        briefcaseLockStatus.status11.style.zIndex = 3;
+                        briefcaseLockStatus.status11.style.offsetHeight
+                        return;
+                  }
+            }
+
+            function checkUnlockedBrief()
+            {
+
+            }
+
+
+      } // en responsiveDesktop();
 
       function restoreOnWheelListener(ev)
       {
