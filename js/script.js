@@ -10,7 +10,7 @@ function initialice()
       let maxShifting;
       let currentScrollPos;
       let velocityAcumulator;
-      let scrollingWindowTimer
+      let scrollingWindowTimer;
 
       // Constants for topicsProps Object
       let topic0;
@@ -38,27 +38,27 @@ function initialice()
 
       // Variables for mobile
       // let mobileVariables = {
-            //       mainBox : null,
-            //       leftBox: null,
-            //       rightBox: null,
-            //       navbar : null,
-            //       stick : null,
-            //       totalTopicOffsetY: null,
-            // };
+      //       mainBox : null,
+      //       leftBox: null,
+      //       rightBox: null,
+      //       navbar : null,
+      //       stick : null,
+      //       totalTopicOffsetY: null,
+      // };
 
       // _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ -
 
-            // Runtime
+      // Runtime
       let x = window.matchMedia("(max-width: 1200px)")
-      responsiveListener(x) // Call listener function at run time
+            responsiveListener(x) // Call listener function at run time
 
-      function responsiveListener(x) {
-            if ( x.matches ) { // If media query matches
-                  responsiveMobile();
-            } else {
-                  responsiveDesktop();
+            function responsiveListener(x) {
+                  if ( x.matches ) { // If media query matches
+                        responsiveMobile();
+                  } else {
+                        responsiveDesktop();
+                  }
             }
-      }
 
       function responsiveMobile()
       {
@@ -155,16 +155,16 @@ function initialice()
                   topicSectionsLimitPixels: [
                         0,
                         ( 
-                              + section0.clientHeight
-                              + parseInt(window.getComputedStyle(section0).getPropertyValue("margin-bottom").slice(0, -2))
-                              + 1
+                         + section0.clientHeight
+                         + parseInt(window.getComputedStyle(section0).getPropertyValue("margin-bottom").slice(0, -2))
+                         + 1
                         ),
                         ( 
-                              + section0.clientHeight
-                              + parseInt(window.getComputedStyle(section0).getPropertyValue("margin-bottom").slice(0, -2))
-                              + section1.clientHeight
-                              + parseInt(window.getComputedStyle(section1).getPropertyValue("margin-bottom").slice(0, -2))
-                              + 1
+                         + section0.clientHeight
+                         + parseInt(window.getComputedStyle(section0).getPropertyValue("margin-bottom").slice(0, -2))
+                         + section1.clientHeight
+                         + parseInt(window.getComputedStyle(section1).getPropertyValue("margin-bottom").slice(0, -2))
+                         + 1
                         ),
                   ],
 
@@ -175,7 +175,7 @@ function initialice()
 
                         // If I have a previous selected element
                         if( this.lastSelected !== null ){ // Shift back
-                              // Shift Back
+                                                          // Shift Back
                               this.topicsChildrenIndex[this.lastSelected].style.left = "0px";
                               // Deselect background
                               this.topicsIndex[this.lastSelected].style.transition = "none";
@@ -239,7 +239,7 @@ function initialice()
                               }
 
                               // current selected --> < i >
-                                    this.topicSectionsIndex[this.currentSelected].style.transition = "none";
+                              this.topicSectionsIndex[this.currentSelected].style.transition = "none";
                               this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
                               this.topicSectionsIndex[this.currentSelected].style.backgroundColor = this.mainBgOpacityColor2;
                               this.topicSectionsIndex[this.currentSelected].offsetHeight; // Trigger a reflow, flushing the CSS changes
@@ -323,13 +323,27 @@ function initialice()
             let leftPadlock = document.getElementById("briefcase-left-padlock");
             let rightPadlock = document.getElementById("briefcase-right-padlock");
 
-            const briefcaseLockStatus = {
-                  binary: 0b00,
-                  status00: document.getElementById("briefcase-locked-status-00"),
-                  status01: document.getElementById("briefcase-locked-status-01"),
-                  status10: document.getElementById("briefcase-locked-status-10"),
-                  status11: document.getElementById("briefcase-locked-status-11"),
+            const briefcaseLocked = {
+                  status: 0b00,
+                  fatherNode: document.getElementById("briefcase-locked"),
+
+                  renderStatus00: document.getElementById("briefcase-locked-status-00"),
+                  renderStatus01: document.getElementById("briefcase-locked-status-01"),
+                  renderStatus10: document.getElementById("briefcase-locked-status-10"),
+                  renderStatus11: document.getElementById("briefcase-locked-status-11"),
             }
+
+            const briefcaseUnlocked = {
+                  fatherNode: document.getElementById("briefcase-unlocked"),
+                  renderTopHalf: document.getElementById("briefcase-unlocked-top"),
+                  renderBottomHalf: document.getElementById("briefcase-unlocked-bottom"),
+            }
+
+            const briefcasePadlockHitboxes = {
+                  fatherNode: document.getElementById("briefcase-padlocks-hitboxes"),
+            }
+
+            const snd = new Audio("../audio/padlock-click.mp3"); // buffers automatically when created
 
             console.log(leftPadlock);
 
@@ -337,6 +351,7 @@ function initialice()
                   () =>
                   {
                         toggleLockStatus(0b10)
+                              snd.play();
                   }
             );
 
@@ -344,168 +359,286 @@ function initialice()
                   () =>
                   {
                         toggleLockStatus(0b01)
+                              snd.play();
                   }
             );
 
             function toggleLockStatus( statusUpdating )
             {
-                  briefcaseLockStatus.binary = briefcaseLockStatus.binary ^ statusUpdating;
+                  briefcaseLocked.status = briefcaseLocked.status ^ statusUpdating;
                   // console.log(statusUpdating);
-                  console.log("%b" ,briefcaseLockStatus.binary);
+                  console.log("%b" ,briefcaseLocked.status);
                   renderPadLocks();
-                  checkUnlockedBrief();
+                  checkBriefcaseUnlocked();
             }
 
             function renderPadLocks()
             {
-                  if( briefcaseLockStatus.binary == 0b00 ){
+                  if( briefcaseLocked.status == 0b00 ){
                         // briefcase.style.backgroundImage = "url( '../img/briefcase-unlocking/briefcase-00.png')";
-                        briefcaseLockStatus.status00.style.zIndex = 3;
-                        briefcaseLockStatus.status01.style.zIndex = 2;
-                        briefcaseLockStatus.status10.style.zIndex = 2;
-                        briefcaseLockStatus.status11.style.zIndex = 2;
-                        briefcaseLockStatus.status11.style.offsetHeight
-                        return;
+                        briefcaseLocked.renderStatus00.style.zIndex = 3;
+                        briefcaseLocked.renderStatus01.style.zIndex = 2;
+                        briefcaseLocked.renderStatus10.style.zIndex = 2;
+                        briefcaseLocked.renderStatus11.style.zIndex = 2;
+                        briefcaseLocked.renderStatus11.style.offsetHeight
+                              return;
                   }
-                  if( briefcaseLockStatus.binary == 0b01 ){
+                  if( briefcaseLocked.status == 0b01 ){
                         // briefcase.style.backgroundImage = "url( '../img/briefcase-unlocking/briefcase-01.png')";
-                        briefcaseLockStatus.status00.style.zIndex = 2;
-                        briefcaseLockStatus.status01.style.zIndex = 3;
-                        briefcaseLockStatus.status10.style.zIndex = 2;
-                        briefcaseLockStatus.status11.style.zIndex = 2;
-                        briefcaseLockStatus.status11.style.offsetHeight
-                        return;
+                        briefcaseLocked.renderStatus00.style.zIndex = 2;
+                        briefcaseLocked.renderStatus01.style.zIndex = 3;
+                        briefcaseLocked.renderStatus10.style.zIndex = 2;
+                        briefcaseLocked.renderStatus11.style.zIndex = 2;
+                        briefcaseLocked.renderStatus11.style.offsetHeight
+                              return;
                   }
-                  if( briefcaseLockStatus.binary == 0b10 ){
+                  if( briefcaseLocked.status == 0b10 ){
                         // briefcase.style.backgroundImage = "url( '../img/briefcase-unlocking/briefcase-10.png')";
-                        briefcaseLockStatus.status00.style.zIndex = 2;
-                        briefcaseLockStatus.status01.style.zIndex = 2;
-                        briefcaseLockStatus.status10.style.zIndex = 3;
-                        briefcaseLockStatus.status11.style.zIndex = 2;
-                        briefcaseLockStatus.status11.style.offsetHeight
-                        return;
+                        briefcaseLocked.renderStatus00.style.zIndex = 2;
+                        briefcaseLocked.renderStatus01.style.zIndex = 2;
+                        briefcaseLocked.renderStatus10.style.zIndex = 3;
+                        briefcaseLocked.renderStatus11.style.zIndex = 2;
+                        briefcaseLocked.renderStatus11.style.offsetHeight
+                              return;
                   }
-                  if( briefcaseLockStatus.binary == 0b11 ){
+                  if( briefcaseLocked.status == 0b11 ){
                         // briefcase.style.backgroundImage = "url( '../img/briefcase-unlocking/briefcase-11.png')";
-                        briefcaseLockStatus.status00.style.zIndex = 2;
-                        briefcaseLockStatus.status01.style.zIndex = 2;
-                        briefcaseLockStatus.status10.style.zIndex = 2;
-                        briefcaseLockStatus.status11.style.zIndex = 3;
-                        briefcaseLockStatus.status11.style.offsetHeight
-                        return;
+                        briefcaseLocked.renderStatus00.style.zIndex = 2;
+                        briefcaseLocked.renderStatus01.style.zIndex = 2;
+                        briefcaseLocked.renderStatus10.style.zIndex = 2;
+                        briefcaseLocked.renderStatus11.style.zIndex = 3;
+                        briefcaseLocked.renderStatus11.style.offsetHeight
+                              return;
                   }
             }
 
-            function checkUnlockedBrief()
+            function checkBriefcaseUnlocked()
             {
+                  if( briefcaseLocked.status != 0b11 )
+                        return;
+
+                  briefcaseLocked.fatherNode.style.display = "none";
+                  console.log(briefcaseLocked.fatherNode);
+                  briefcasePadlockHitboxes.fatherNode.style.display = "none";
+                  briefcaseUnlocked.fatherNode.style.display = "block";
+                  // briefcaseUnlocked.fatherNode.style.offsetHeight;
+
+                  setTimeout(
+                        ()=>
+                        {
+                              briefcaseUnlocked.fatherNode.style.offsetHeight;
+                              briefcaseUnlocked.renderTopHalf.style.top = "0px";
+                              briefcaseUnlocked.renderBottomHalf.style.top = "0px";
+                              briefcaseUnlocked.fatherNode.style.offsetHeight;
+                              // briefcaseUnlocked.renderBottomHalf.classList.add(".briefcaseTransition")
+                              // briefcaseUnlocked.renderTopHalf.classList.add(".briefcaseTransition")
+                              briefcaseUnlocked.renderBottomHalf.style.transition = "top .5s ease";
+                              briefcaseUnlocked.renderTopHalf.style.transition = "top .5s ease";
+                              // briefcaseUnlocked.renderTopHalf.style.top = "0px";
+                              // briefcaseUnlocked.renderBottomHalf.style.top = "0px";
+                              briefcaseUnlocked.fatherNode.style.offsetHeight;
+                              briefcaseUnlocked.renderTopHalf.style.top = "-13px";
+                              briefcaseUnlocked.renderBottomHalf.style.top = "13px";
+                              briefcaseUnlocked.fatherNode.style.offsetHeight;
+
+                              setTimeout(
+                                    ()=>
+                                    {
+                                          briefcaseUnlocked.renderBottomHalf.style.transition = "none";
+                                          briefcaseUnlocked.renderTopHalf.style.transition = "none";
+                                          briefcaseUnlocked.fatherNode.style.offsetHeight;
+                                          window.addEventListener( "mousedown", briefcaseActivateDragMode )
+                                    },
+                                    500
+                              );
+                        },
+                        150
+                  )
+
 
             }
 
 
-      } // en responsiveDesktop();
 
-      function restoreOnWheelListener(ev)
-      {
-            window.addEventListener( "wheel", tellScroll );
-      }
+            let yPosAnchor;
+            let yPosRefresh;
+            let yAcumulativeAmount = 0;
+            let current = 0;
+            let offsetOpening;
+            let moving = false;
 
-      function selectByOffset(ev)
-      {
-            // settimeout(
+            function briefcaseActivateDragMode( e )
+            {
+                  // e = e || window.event;
+                  e.preventDefault();
+                  yPosAnchor = e.clientY;
+                  window.addEventListener("mousemove", briefcaseDraggingOnMove);
+                  window.addEventListener("mouseup", briefcaseDeactivateDragMode);
+                  console.log( "yPosAnchor" + yPosAnchor );
+                  // document.addEventListener('mousemove', drawMouseMove);
+                  // document.addEventListener('mouseup', endMouseUp);
+                              console.log( "offsetTop" + briefcaseUnlocked.renderBottomHalf.offsetTop );
+                              console.log( "offsetTop" + briefcaseUnlocked.renderTopHalf.offsetTop );
+            }
+
+
+
+            function briefcaseDraggingOnMove(e){
+                  // e = e || window.event;
+                  yPosRefresh = yPosAnchor - e.clientY;
+                  yPosAnchor = e.clientY;
+
+                  if( yPosRefresh === 0 )
+                        return;
+
+                  yAcumulativeAmount = (Math.abs(yPosRefresh) );
+                  console.log( yAcumulativeAmount );
+
+                  console.log(briefcaseUnlocked.renderTopHalf.offsetTop);
+                  console.log(briefcaseUnlocked.renderBottomHalf.offsetTop);
+
+                  let topHalfMove = briefcaseUnlocked.renderTopHalf.offsetTop - yAcumulativeAmount;
+                  let bottomHalfMove = briefcaseUnlocked.renderBottomHalf.offsetTop + yAcumulativeAmount;
+
+                                          briefcaseUnlocked.renderBottomHalf.style.transition = "none";
+                                          briefcaseUnlocked.renderTopHalf.style.transition = "none";
+                                          briefcaseUnlocked.fatherNode.style.offsetHeight;
+                  // briefcaseUnlocked.renderTopHalf.style.transform = `translate(${topHalfMove}px)`;
+                  // briefcaseUnlocked.renderBottomHalf.style.transform = `translate(${bottomHalfMove}px)`;
+
+                  briefcaseUnlocked.renderTopHalf.style.top = `${topHalfMove}px`;
+                  briefcaseUnlocked.renderBottomHalf.style.top = `${bottomHalfMove}px`;
+
+                   // https://codepen.io/Hyperplexed/pen/MWXBRBp
+
+                  // console.log( briefcaseUnlocked.renderBottomHalf.offsetTop );
+                  // console.log( briefcaseUnlocked.renderTopHalf.offsetTop );
+                  // console.log( "yPosAnchor" + yPosAnchor );
+                  // console.log( "yPosRefresh" + yPosRefresh );
+                  // chunks.style.left = (chunks.offsetLeft - yPosRefresh) + "px";
+                  //
+                  // if( go beyond a limit )
+                  //    automatic full opening
+                  // if( go underneath a limit )
+                  //    deactivateDragMode
+                  //    go to starting position
+            }
+
+
+            //
+            function briefcaseDeactivateDragMode(){
+                  window.removeEventListener("mousemove", briefcaseDraggingOnMove);
+                  window.removeEventListener("mouseup", briefcaseDeactivateDragMode);
+                  // document.removeEventListener('mousemove', drawMouseMove);
+                  // document.removeEventListener('mouseup', endMouseUp);
+            }
+
+
+
+
+            function restoreOnWheelListener(ev)
+            {
+                  window.addEventListener( "wheel", tellScroll );
+            }
+
+            function selectByOffset(ev)
+            {
+                  // settimeout(
                   //       ()=>
                   //       {
-                        //
-                        //       }, 2000
+                  //
+                  //       }, 2000
                   // )
-            currentScrollPos = rightBoxWrapper.offsetTop;
-            if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[0] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[1] )
-                  topicsProps.alignNBlink( true, 0 );
-            if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[1] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[2] )
-                  topicsProps.alignNBlink( true, 1 );
-            if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[2] )
-                  topicsProps.alignNBlink( true, 2 );
-      }
-
-      function clickOnTopics( ev )
-      {
-            if( ev.target === topicsProps.topicsChildrenIndex[0] || ev.target === topicsProps.topicsIndex[0] )
-                  topicsProps.select( ev, 0 );
-            if( ev.target === topicsProps.topicsChildrenIndex[1] || ev.target === topicsProps.topicsIndex[1] )
-                  topicsProps.select( ev, 1 );
-            if( ev.target === topicsProps.topicsChildrenIndex[2] || ev.target === topicsProps.topicsIndex[2] )
-                  topicsProps.select( ev, 2 );
-      }
-
-      function scrollingWindow()
-      {
-            if( !scrollingWindowTimer ){
-                  topicsProps.topicsIndex[0].addEventListener( "click", clickOnTopics );
-                  topicsProps.topicsIndex[1].addEventListener( "click", clickOnTopics );
-                  topicsProps.topicsIndex[2].addEventListener( "click", clickOnTopics );
-            } else {
-                  scrollingWindowTimer -= 1;
+                  currentScrollPos = rightBoxWrapper.offsetTop;
+                  if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[0] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[1] )
+                        topicsProps.alignNBlink( true, 0 );
+                  if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[1] && currentScrollPos > -topicsProps.topicSectionsLimitPixels[2] )
+                        topicsProps.alignNBlink( true, 1 );
+                  if( currentScrollPos <= -topicsProps.topicSectionsLimitPixels[2] )
+                        topicsProps.alignNBlink( true, 2 );
             }
-      }
 
-      function velocityDecrementFunction()
-      {
-            velocityAcumulator ? velocityAcumulator -= 50 : false;
-      }
-
-      function tellScroll(ev)
-      {
-            // The actual Y-Offset of the right box 
-            currentScrollPos = rightBoxWrapper.offsetTop;
-
-
-            // Predetermine the total amount of Y-Offset to increment/decrement
-            velocityAcumulator < 300 ? velocityAcumulator += 100 : false;
-
-            // // Remove Topics CLicks
-            // topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );
-            // topicsProps.topicsIndex[1].removeEventListener( "click", clickOnTopics );
-            // topicsProps.topicsIndex[2].removeEventListener( "click", clickOnTopics );
-
-            // Start scrollingWindowTimer
-            // scrollingWindowTimer = 1;
-
-            // Clear and aplying the pooling of rightBoxWrapper position ( the timer of 900ms forbids multiple selections at wheel scrolling )
-            clearInterval(scrollingTimingInterval);
-            scrollingTimingInterval = window.setInterval( selectByOffset, 900);
-
-            // Up or Down scrolling
-            if( ev.deltaY > 0 ){
-                  // Limit the amount of shifting to keep the box in the display
-                  let amount = (currentScrollPos - velocityAcumulator) > -(maxShifting) ? (currentScrollPos - velocityAcumulator) : -(maxShifting);
-                  animationDown = rightBoxWrapper.animate(
-                        {
-                              top: `${amount}px` // Scroll Up
-                        },
-                        {
-                              duration: 800,
-                              fill: "forwards",
-                              easing: "ease",
-                        }
-                  );
-                  // animationDown.addEventListener( "finish", selectByOffset );
-            } else {
-                  let amount = (currentScrollPos + velocityAcumulator) >= 0 ? 0 : (currentScrollPos + velocityAcumulator);
-                  animationUp = rightBoxWrapper.animate(
-                        {
-                              top: `${amount}px` // Scroll Up
-                        },
-                        {
-                              duration: 800,
-                              fill: "forwards",
-                              easing: "ease",
-                        }
-                  );
-                  // animationUp.addEventListener( "finish", selectByOffset );
+            function clickOnTopics( ev )
+            {
+                  if( ev.target === topicsProps.topicsChildrenIndex[0] || ev.target === topicsProps.topicsIndex[0] )
+                        topicsProps.select( ev, 0 );
+                  if( ev.target === topicsProps.topicsChildrenIndex[1] || ev.target === topicsProps.topicsIndex[1] )
+                        topicsProps.select( ev, 1 );
+                  if( ev.target === topicsProps.topicsChildrenIndex[2] || ev.target === topicsProps.topicsIndex[2] )
+                        topicsProps.select( ev, 2 );
             }
-      }
 
+            function scrollingWindow()
+            {
+                  if( !scrollingWindowTimer ){
+                        topicsProps.topicsIndex[0].addEventListener( "click", clickOnTopics );
+                        topicsProps.topicsIndex[1].addEventListener( "click", clickOnTopics );
+                        topicsProps.topicsIndex[2].addEventListener( "click", clickOnTopics );
+                  } else {
+                        scrollingWindowTimer -= 1;
+                  }
+            }
+
+            function velocityDecrementFunction()
+            {
+                  velocityAcumulator ? velocityAcumulator -= 50 : false;
+            }
+
+            function tellScroll(ev)
+            {
+                  // The actual Y-Offset of the right box 
+                  currentScrollPos = rightBoxWrapper.offsetTop;
+
+
+                  // Predetermine the total amount of Y-Offset to increment/decrement
+                  velocityAcumulator < 300 ? velocityAcumulator += 100 : false;
+
+                  // // Remove Topics CLicks
+                  // topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );
+                  // topicsProps.topicsIndex[1].removeEventListener( "click", clickOnTopics );
+                  // topicsProps.topicsIndex[2].removeEventListener( "click", clickOnTopics );
+
+                  // Start scrollingWindowTimer
+                  // scrollingWindowTimer = 1;
+
+                  // Clear and aplying the pooling of rightBoxWrapper position ( the timer of 900ms forbids multiple selections at wheel scrolling )
+                  clearInterval(scrollingTimingInterval);
+                  scrollingTimingInterval = window.setInterval( selectByOffset, 900);
+
+                  // Up or Down scrolling
+                  if( ev.deltaY > 0 ){
+                        // Limit the amount of shifting to keep the box in the display
+                        let amount = (currentScrollPos - velocityAcumulator) > -(maxShifting) ? (currentScrollPos - velocityAcumulator) : -(maxShifting);
+                        animationDown = rightBoxWrapper.animate(
+                              {
+                                    top: `${amount}px` // Scroll Up
+                              },
+                              {
+                                    duration: 800,
+                                    fill: "forwards",
+                                    easing: "ease",
+                              }
+                        );
+                        // animationDown.addEventListener( "finish", selectByOffset );
+                  } else {
+                        let amount = (currentScrollPos + velocityAcumulator) >= 0 ? 0 : (currentScrollPos + velocityAcumulator);
+                        animationUp = rightBoxWrapper.animate(
+                              {
+                                    top: `${amount}px` // Scroll Up
+                              },
+                              {
+                                    duration: 800,
+                                    fill: "forwards",
+                                    easing: "ease",
+                              }
+                        );
+                        // animationUp.addEventListener( "finish", selectByOffset );
+                  }
+            }
+
+
+
+      }
 
 
 }
-
-

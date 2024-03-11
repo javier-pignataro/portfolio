@@ -19,32 +19,69 @@
 }
 
 #briefcase {
+      display: block;
+      position: relative;
+}
+
+#briefcase-locked {
+      /* position: absolute; */
+      /* top: 0px; */
+      /* background-color: black; */
+      /* background-size: 100vw; */
+      /* width: 100vw; */
+      /* height: 100vw; */
 }
 
 .briefcase-absolute {
       position: absolute;
       top: 0px;
       /* background-image: url( "../img/briefcase-unlocking/briefcase-00.png" ); */
-      background-size: cover;
+      background-size: 105vw;
+      background-repeat:no-repeat;
+      background-position: center;
       width: 100vw;
       height: 100vh;
 }
 
       #briefcase-locked-status-00 {
-            background-image: url( "../img/briefcase-unlocking/briefcase-00.png" );
+            background-image: url( "../img/briefcase-unlocking-v3/briefcase-00.png" );
             z-index: 3;
       }
       #briefcase-locked-status-01 {
-            background-image: url( "../img/briefcase-unlocking/briefcase-01.png" );
+            background-image: url( "../img/briefcase-unlocking-v3/briefcase-01.png" );
             z-index: 2;
       }
       #briefcase-locked-status-10 {
-            background-image: url( "../img/briefcase-unlocking/briefcase-10.png" );
+            background-image: url( "../img/briefcase-unlocking-v3/briefcase-10.png" );
             z-index: 2;
       }
       #briefcase-locked-status-11 {
-            background-image: url( "../img/briefcase-unlocking/briefcase-11.png" );
+            background-image: url( "../img/briefcase-unlocking-v3/briefcase-11.png" );
             z-index: 2;
+      }
+
+#briefcase-unlocked{
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      /* display: none; */
+}
+
+/* .briefcase-transition { */
+/*       transition: top 1.0s ease-in; */
+/* } */
+
+      #briefcase-unlocked-top {
+            background-image: url( "../img/briefcase-opening-v2/brief-top-half.png" );
+            z-index: 2;
+            top: 0px;
+      }
+
+      #briefcase-unlocked-bottom {
+            background-image: url( "../img/briefcase-opening-v2/brief-bottom-half.png" );
+            z-index: 2;
+            top: 0px;
       }
 
 #briefcase-padlocks-hitboxes {
