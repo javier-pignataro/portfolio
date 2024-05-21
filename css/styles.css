@@ -306,10 +306,12 @@
 
 .proj-title {
       width: 50%;
+      height: 100px;
       background-color: var( --transparent );
       transition: inherit;
       font-weight: inherit;
       color: inherit;
+      text-align: right;
 }
 
 .proj-img {
