@@ -1,5 +1,6 @@
 window.onload = initialice;
 
+// window.addEventListener("resize", handleResize);
 
 function initialice()
 {
@@ -343,7 +344,8 @@ function initialice()
                   fatherNode: document.getElementById("briefcase-padlocks-hitboxes"),
             }
 
-            const snd = new Audio("../audio/padlock-click.mp3"); // buffers automatically when created
+            const clickSound = new Audio("../audio/padlock-click.mp3"); // buffers automatically when created
+            const briefcaseOpeningSound = new Audio("../audio/opening-briefcase2.mp3"); // buffers automatically when created
 
             console.log(leftPadlock);
 
@@ -351,7 +353,7 @@ function initialice()
                   () =>
                   {
                         toggleLockStatus(0b10)
-                              snd.play();
+                              clickSound.play();
                   }
             );
 
@@ -359,7 +361,7 @@ function initialice()
                   () =>
                   {
                         toggleLockStatus(0b01)
-                              snd.play();
+                              clickSound.play();
                   }
             );
 
@@ -441,6 +443,8 @@ function initialice()
                               briefcaseUnlocked.renderBottomHalf.style.top = "13px";
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
 
+                              briefcaseOpeningSound.play();
+
                               setTimeout(
                                     ()=>
                                     {
@@ -452,7 +456,7 @@ function initialice()
                                     500
                               );
                         },
-                        150
+                        350
                   )
 
 
@@ -471,10 +475,11 @@ function initialice()
             {
                   // e = e || window.event;
                   e.preventDefault();
+                  console.log(e);
                   yPosAnchor = e.clientY;
                   window.addEventListener("mousemove", briefcaseDraggingOnMove);
                   window.addEventListener("mouseup", briefcaseDeactivateDragMode);
-                  console.log( "yPosAnchor" + yPosAnchor );
+                  // console.log( "yPosAnchor" + yPosAnchor );
                   // document.addEventListener('mousemove', drawMouseMove);
                   // document.addEventListener('mouseup', endMouseUp);
                               console.log( "offsetTop" + briefcaseUnlocked.renderBottomHalf.offsetTop );
