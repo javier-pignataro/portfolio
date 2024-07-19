@@ -123,16 +123,23 @@ function initialice()
             section2 = document.querySelector( ".projects-section" );
 
             topicsProps = {
+  // --main-fg-color: #ccbfa1;
+  // --brighter-main-fg-color: #ffba6b;
+  // /* --brighter-main-fg-color: #fff1d1; */
+  // --main-fg-opacity-color: #ccbfa155;
+  // --main-bg-color: #ffba6b;
+  // --mobile-main-bg-topics-color: #5b5a7855;
+  // --transparent: #00000000;
                   current: null,
                   last: null,
                   currentSelected: 0,
                   lastSelected: null,
-                  mainFgColor: "#e4e3ff",
-                  brighterMainFgColor: "#f0f0ff",
-                  mainFgOpacityColor: "#e4e3ff55",
-                  mainBgColor: "#c0bdfc",
-                  mainBgOpacityColor1: "#c0bdfc99",
-                  mainBgOpacityColor2: "#c0bdfc33",
+                  mainFgColor: "#ccbfa1",
+                  brighterMainFgColor: "#fff1d1",
+                  mainFgOpacityColor: "#ccbfa155",
+                  mainBgColor: "#ffba6b",
+                  mainBgOpacityColor1: "#ffba6b99",
+                  mainBgOpacityColor2: "#ffba6b33",
                   transparent: "#00000000",
 
                   topicsIndex: [
