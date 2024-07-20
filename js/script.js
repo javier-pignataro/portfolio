@@ -50,16 +50,16 @@ function initialice()
       // _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ - _ -
 
       // Runtime
-      let x = window.matchMedia("(max-width: 1200px)")
-            responsiveListener(x) // Call listener function at run time
+      let x = window.matchMedia("(max-width: 1200px)");
+      responsiveListener(x); // Call listener function at run time
 
-            function responsiveListener(x) {
-                  if ( x.matches ) { // If media query matches
-                        responsiveMobile();
-                  } else {
-                        responsiveDesktop();
-                  }
+      function responsiveListener(x) {
+            if ( x.matches ) { // If media query matches
+                  responsiveMobile();
+            } else {
+                  responsiveDesktop();
             }
+      }
 
       function responsiveMobile()
       {
@@ -109,9 +109,10 @@ function initialice()
             window.addEventListener( "wheel", tellScroll );
             rightBoxWrapper = document.querySelector( '.right-box-wrapper' );
             rightBox = document.querySelector( '.right-box' );
+            mainBox = document.querySelector( '.main-box' );
             maxShifting = rightBoxWrapper.clientHeight - rightBox.clientHeight;
             currentScrollPos = 0;
-            velocityAcumulator = 0;
+            velocityAcumulator = 100; // Fixed for the moment becouse an incompatibility with laptop trackpads
             scrollingWindowTimer = 0;
 
             // Constants for topicsProps Object
@@ -302,7 +303,7 @@ function initialice()
             };
 
             // Execute function every 50ms
-            scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 100);
+            // scrollingInertiaInterval = window.setInterval( velocityDecrementFunction, 100);
             scrollingTimingInterval = window.setInterval( selectByOffset, 900);
 
             // Hover
@@ -330,7 +331,13 @@ function initialice()
             let briefcase = document.getElementById("briefcase");
             let leftPadlock = document.getElementById("briefcase-left-padlock");
             let rightPadlock = document.getElementById("briefcase-right-padlock");
+            let briefcaseBg = document.querySelector(".briefcase-bg");
+            let briefcaseShadows = document.getElementById("briefcase-shadows");
+            let briefcaseTopHalfShadow = document.getElementById("briefcase-top-half-shadow");
+            let briefcaseBottomHalfShadow = document.getElementById("briefcase-bottom-half-shadow");
 
+            // console.log(briefcaseTopHalfShadow);
+            // console.log(briefcaseBottomHalfShadow);
             const briefcaseLocked = {
                   status: 0b00,
                   fatherNode: document.getElementById("briefcase-locked"),
@@ -354,7 +361,7 @@ function initialice()
             const clickSound = new Audio("../audio/padlock-click.mp3"); // buffers automatically when created
             const briefcaseOpeningSound = new Audio("../audio/opening-briefcase2.mp3"); // buffers automatically when created
 
-            console.log(leftPadlock);
+            // console.log(leftPadlock);
 
             leftPadlock.addEventListener( "click", 
                   () =>
@@ -376,7 +383,7 @@ function initialice()
             {
                   briefcaseLocked.status = briefcaseLocked.status ^ statusUpdating;
                   // console.log(statusUpdating);
-                  console.log("%b" ,briefcaseLocked.status);
+                  // console.log("%b" ,briefcaseLocked.status);
                   renderPadLocks();
                   checkBriefcaseUnlocked();
             }
@@ -427,7 +434,7 @@ function initialice()
                         return;
 
                   briefcaseLocked.fatherNode.style.display = "none";
-                  console.log(briefcaseLocked.fatherNode);
+                  // console.log(briefcaseLocked.fatherNode);
                   briefcasePadlockHitboxes.fatherNode.style.display = "none";
                   briefcaseUnlocked.fatherNode.style.display = "block";
                   // briefcaseUnlocked.fatherNode.style.offsetHeight;
@@ -438,27 +445,53 @@ function initialice()
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
                               briefcaseUnlocked.renderTopHalf.style.top = "0px";
                               briefcaseUnlocked.renderBottomHalf.style.top = "0px";
+                              briefcaseUnlocked.renderTopHalf.style.filter = "none";
+                              briefcaseUnlocked.renderBottomHalf.style.filter = "none";
+                              briefcaseTopHalfShadow.style.top = "0px";
+                              briefcaseBottomHalfShadow.style.top = "0px";
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
                               // briefcaseUnlocked.renderBottomHalf.classList.add(".briefcaseTransition")
                               // briefcaseUnlocked.renderTopHalf.classList.add(".briefcaseTransition")
-                              briefcaseUnlocked.renderBottomHalf.style.transition = "top .5s ease";
-                              briefcaseUnlocked.renderTopHalf.style.transition = "top .5s ease";
+                              briefcaseUnlocked.renderBottomHalf.style.transition = "all .5s ease";
+                              briefcaseUnlocked.renderTopHalf.style.transition = "all .5s ease";
                               // briefcaseUnlocked.renderTopHalf.style.top = "0px";
                               // briefcaseUnlocked.renderBottomHalf.style.top = "0px";
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
-                              briefcaseUnlocked.renderTopHalf.style.top = "-13px";
-                              briefcaseUnlocked.renderBottomHalf.style.top = "13px";
+                              let shiftAmount = 0;
+                              // console.log( briefcaseUnlocked.renderTopHalf.clientHeight );
+                                    // shiftAmount = window.visualViewport.height - briefcaseUnlocked.renderTopHalf.clientHeight;
+                                    shiftAmount = briefcaseUnlocked.renderTopHalf.clientHeight * 0.3;
+                                    // shiftAmount /= 2;
+                                    // shiftAmount -= 50;
+                              // console.log( briefcaseBottomHalfShadow );
+
+                              briefcaseUnlocked.renderTopHalf.style.top = `-${window.visualViewport.height * 0.47}px`;
+                              briefcaseUnlocked.renderBottomHalf.style.top = `${window.visualViewport.height * 0.47}px`;
+                              // briefcaseUnlocked.renderTopHalf.style.filter = "blur(5px)";
+                              // briefcaseUnlocked.renderBottomHalf.style.filter = "blur(5px)";
+                              briefcaseTopHalfShadow.style.top = `-${window.visualViewport.height * 0.47}px`;
+                              briefcaseBottomHalfShadow.style.top = `98vh`;
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
 
                               briefcaseOpeningSound.play();
+                              // console.log(window.visualViewport.height);
+                              briefcaseBg.style.opacity = "0%";
+                              mainBox.style.transform = `scale(1)`;
+                              briefcaseUnlocked.fatherNode.style.offsetHeight;
 
                               setTimeout(
                                     ()=>
                                     {
                                           briefcaseUnlocked.renderBottomHalf.style.transition = "none";
                                           briefcaseUnlocked.renderTopHalf.style.transition = "none";
-                                          briefcaseUnlocked.fatherNode.style.offsetHeight;
-                                          window.addEventListener( "mousedown", briefcaseActivateDragMode )
+                                          // briefcaseUnlocked.renderTopHalf.style.opacity = "0%";
+                                          // briefcaseUnlocked.renderBottomHalf.style.opacity = "0%";
+                                          // briefcaseLocked.renderStatus00.style.opacity = "0%";
+                                          // briefcaseLocked.renderStatus01.style.opacity = "0%";
+                                          // briefcaseLocked.renderStatus10.style.opacity = "0%";
+                                          // briefcaseLocked.renderStatus11.style.opacity = "0%";
+
+                                          // window.addEventListener( "mousedown", briefcaseActivateDragMode )
                                     },
                                     500
                               );
@@ -471,80 +504,80 @@ function initialice()
 
 
 
-            let yPosAnchor;
-            let yPosRefresh;
-            let yAcumulativeAmount = 0;
-            let current = 0;
-            let offsetOpening;
-            let moving = false;
-
-            function briefcaseActivateDragMode( e )
-            {
-                  // e = e || window.event;
-                  e.preventDefault();
-                  console.log(e);
-                  yPosAnchor = e.clientY;
-                  window.addEventListener("mousemove", briefcaseDraggingOnMove);
-                  window.addEventListener("mouseup", briefcaseDeactivateDragMode);
-                  // console.log( "yPosAnchor" + yPosAnchor );
-                  // document.addEventListener('mousemove', drawMouseMove);
-                  // document.addEventListener('mouseup', endMouseUp);
-                              console.log( "offsetTop" + briefcaseUnlocked.renderBottomHalf.offsetTop );
-                              console.log( "offsetTop" + briefcaseUnlocked.renderTopHalf.offsetTop );
-            }
-
-
-
-            function briefcaseDraggingOnMove(e){
-                  // e = e || window.event;
-                  yPosRefresh = yPosAnchor - e.clientY;
-                  yPosAnchor = e.clientY;
-
-                  if( yPosRefresh === 0 )
-                        return;
-
-                  yAcumulativeAmount = (Math.abs(yPosRefresh) );
-                  console.log( yAcumulativeAmount );
-
-                  console.log(briefcaseUnlocked.renderTopHalf.offsetTop);
-                  console.log(briefcaseUnlocked.renderBottomHalf.offsetTop);
-
-                  let topHalfMove = briefcaseUnlocked.renderTopHalf.offsetTop - yAcumulativeAmount;
-                  let bottomHalfMove = briefcaseUnlocked.renderBottomHalf.offsetTop + yAcumulativeAmount;
-
-                                          briefcaseUnlocked.renderBottomHalf.style.transition = "none";
-                                          briefcaseUnlocked.renderTopHalf.style.transition = "none";
-                                          briefcaseUnlocked.fatherNode.style.offsetHeight;
-                  // briefcaseUnlocked.renderTopHalf.style.transform = `translate(${topHalfMove}px)`;
-                  // briefcaseUnlocked.renderBottomHalf.style.transform = `translate(${bottomHalfMove}px)`;
-
-                  briefcaseUnlocked.renderTopHalf.style.top = `${topHalfMove}px`;
-                  briefcaseUnlocked.renderBottomHalf.style.top = `${bottomHalfMove}px`;
-
-                   // https://codepen.io/Hyperplexed/pen/MWXBRBp
-
-                  // console.log( briefcaseUnlocked.renderBottomHalf.offsetTop );
-                  // console.log( briefcaseUnlocked.renderTopHalf.offsetTop );
-                  // console.log( "yPosAnchor" + yPosAnchor );
-                  // console.log( "yPosRefresh" + yPosRefresh );
-                  // chunks.style.left = (chunks.offsetLeft - yPosRefresh) + "px";
-                  //
-                  // if( go beyond a limit )
-                  //    automatic full opening
-                  // if( go underneath a limit )
-                  //    deactivateDragMode
-                  //    go to starting position
-            }
-
-
+            // let yPosAnchor;
+            // let yPosRefresh;
+            // let yAcumulativeAmount = 0;
+            // let current = 0;
+            // let offsetOpening;
+            // let moving = false;
             //
-            function briefcaseDeactivateDragMode(){
-                  window.removeEventListener("mousemove", briefcaseDraggingOnMove);
-                  window.removeEventListener("mouseup", briefcaseDeactivateDragMode);
-                  // document.removeEventListener('mousemove', drawMouseMove);
-                  // document.removeEventListener('mouseup', endMouseUp);
-            }
-
+            // function briefcaseActivateDragMode( e )
+            // {
+            //       // e = e || window.event;
+            //       e.preventDefault();
+            //       console.log(e);
+            //       yPosAnchor = e.clientY;
+            //       window.addEventListener("mousemove", briefcaseDraggingOnMove);
+            //       window.addEventListener("mouseup", briefcaseDeactivateDragMode);
+            //       // console.log( "yPosAnchor" + yPosAnchor );
+            //       // document.addEventListener('mousemove', drawMouseMove);
+            //       // document.addEventListener('mouseup', endMouseUp);
+            //                   console.log( "offsetTop" + briefcaseUnlocked.renderBottomHalf.offsetTop );
+            //                   console.log( "offsetTop" + briefcaseUnlocked.renderTopHalf.offsetTop );
+            // }
+            //
+            //
+            //
+            // function briefcaseDraggingOnMove(e){
+            //       // e = e || window.event;
+            //       yPosRefresh = yPosAnchor - e.clientY;
+            //       yPosAnchor = e.clientY;
+            //
+            //       if( yPosRefresh === 0 )
+            //             return;
+            //
+            //       yAcumulativeAmount = (Math.abs(yPosRefresh) );
+            //       console.log( yAcumulativeAmount );
+            //
+            //       console.log(briefcaseUnlocked.renderTopHalf.offsetTop);
+            //       console.log(briefcaseUnlocked.renderBottomHalf.offsetTop);
+            //
+            //       let topHalfMove = briefcaseUnlocked.renderTopHalf.offsetTop - yAcumulativeAmount;
+            //       let bottomHalfMove = briefcaseUnlocked.renderBottomHalf.offsetTop + yAcumulativeAmount;
+            //
+            //                               briefcaseUnlocked.renderBottomHalf.style.transition = "none";
+            //                               briefcaseUnlocked.renderTopHalf.style.transition = "none";
+            //                               briefcaseUnlocked.fatherNode.style.offsetHeight;
+            //       // briefcaseUnlocked.renderTopHalf.style.transform = `translate(${topHalfMove}px)`;
+            //       // briefcaseUnlocked.renderBottomHalf.style.transform = `translate(${bottomHalfMove}px)`;
+            //
+            //       briefcaseUnlocked.renderTopHalf.style.top = `${topHalfMove}px`;
+            //       briefcaseUnlocked.renderBottomHalf.style.top = `${bottomHalfMove}px`;
+            //
+            //        // https://codepen.io/Hyperplexed/pen/MWXBRBp
+            //
+            //       // console.log( briefcaseUnlocked.renderBottomHalf.offsetTop );
+            //       // console.log( briefcaseUnlocked.renderTopHalf.offsetTop );
+            //       // console.log( "yPosAnchor" + yPosAnchor );
+            //       // console.log( "yPosRefresh" + yPosRefresh );
+            //       // chunks.style.left = (chunks.offsetLeft - yPosRefresh) + "px";
+            //       //
+            //       // if( go beyond a limit )
+            //       //    automatic full opening
+            //       // if( go underneath a limit )
+            //       //    deactivateDragMode
+            //       //    go to starting position
+            // }
+            //
+            //
+            // //
+            // function briefcaseDeactivateDragMode(){
+            //       window.removeEventListener("mousemove", briefcaseDraggingOnMove);
+            //       window.removeEventListener("mouseup", briefcaseDeactivateDragMode);
+            //       // document.removeEventListener('mousemove', drawMouseMove);
+            //       // document.removeEventListener('mouseup', endMouseUp);
+            // }
+            //
 
 
 
@@ -591,10 +624,10 @@ function initialice()
                   }
             }
 
-            function velocityDecrementFunction()
-            {
-                  velocityAcumulator ? velocityAcumulator -= 50 : false;
-            }
+            // function velocityDecrementFunction()
+            // {
+            //       velocityAcumulator ? velocityAcumulator -= 50 : false;
+            // }
 
             function tellScroll(ev)
             {
@@ -603,7 +636,7 @@ function initialice()
 
 
                   // Predetermine the total amount of Y-Offset to increment/decrement
-                  velocityAcumulator < 300 ? velocityAcumulator += 100 : false;
+                  // velocityAcumulator < 300 ? velocityAcumulator += 100 : false;
 
                   // // Remove Topics CLicks
                   // topicsProps.topicsIndex[0].removeEventListener( "click", clickOnTopics );

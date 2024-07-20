@@ -1,8 +1,12 @@
 :root {
   --main-fg-color: #e3d7ba;
+  --comments-fg-color: #a19882;
+  --comments-fg-color: #857d6a;
   --brighter-main-fg-color: #fff1d1;
-  --main-fg-opacity-color: #ccbfa155;
-  --main-bg-color: #ffba6b;
+  --main-fg-opacity-color: #e3d7ba55;
+  --main-fg-lower-opacity-color: #e3d7ba33;
+  --accent-color: #ffba6b;
+  --accent-comment-color: #b8864d;
   --main-bg-opacity-color: #ffba6b33;
   --mobile-main-bg-topics-color: #ffba6b55;
   --transparent: #00000000;
@@ -22,6 +26,16 @@
 #briefcase {
       display: block;
       position: relative;
+}
+
+.briefcase-bg {
+      position: absolute;
+      background-color: black;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      transition: opacity .9s ease;
 }
 
 #briefcase-locked {
@@ -76,14 +90,20 @@
       #briefcase-unlocked-top {
             background-image: url( "../img/briefcase-opening-v2/brief-top-half.png" );
             z-index: 2;
+            filter: none;
             top: 0px;
       }
 
       #briefcase-unlocked-bottom {
             background-image: url( "../img/briefcase-opening-v2/brief-bottom-half.png" );
             z-index: 2;
+            filter: none;
             top: 0px;
       }
+
+.pointer-probe {
+      pointer-events: none;
+}
 
 #briefcase-padlocks-hitboxes {
       position: absolute;
@@ -92,34 +112,56 @@
       top: 0px;
       display: flex;
       flex-direction: row;
-      z-index: 5;
+      z-index: 4;
 }
 
 #briefcase-left-padlock {
       width: 50vw;
       height: 100vh;
-      border: 1px solid black;
+      /* border: 1px solid black; */
 }
 #briefcase-right-padlock {
       width: 50vw;
       height: 100vh;
-      border: 1px solid black;
+      /* border: 1px solid black; */
 }
 
-.main-box {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
+#briefcase-shadows {
+      display: block;
+      position: absolute;
       height: 100vh;
       width: 100vw;
       overflow: hidden;
 }
 
+#briefcase-shadows > div {
+      position: absolute;
+      width: 100vw;
+      height: 50vh;
+      z-index: 1;
+      box-shadow: 0 0 100px rgba(0, 0, 0, 1.0), 0 0 100px rgba(0, 0, 0, 1.0), 0 0 100px rgba(0, 0, 0, 1.0);
+}
+
+#briefcase-top-half-shadow {
+      top: 0;
+      transition: top .5s ease;
+}
+#briefcase-bottom-half-shadow {
+      top: 50vh;
+      transition: top .5s ease;
+}
+
+.briefcase-interior {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+}
+
+
 .bg-color {
       position: absolute;
       top: 0;
-      z-index: -2;
+      z-index: -5;
       height: 100vh;
       width: 100vw;
       background-color: #301d09;
@@ -128,7 +170,7 @@
 .bg-img {
       position: absolute;
       top: 0;
-      z-index: -1;
+      z-index: -4;
       height: 100vh;
       width: 100vw;
       background-image: url( "https://live.staticflickr.com/65535/53866889613_9686cd1481_o.jpg" );
@@ -137,6 +179,19 @@
       background-size:cover;
       background-repeat:no-repeat;
 }
+.main-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      transform: scale(0.90);
+      transition: transform 0.50s ease;
+      z-index: 0;
+}
+
 
 .left-box {
       display: flex;
@@ -211,14 +266,15 @@
 .occupation {
       font-size: 1.5em;
       font-weight: 500;
-      opacity: 80%;
+      /* opacity: 80%; */
+      color: var( --comments-fg-color );
 }
 
 .occupation-descr {
       font-size: 1.125em;
       font-weight: 400;
-      opacity: 40%;
-      /* color: #D3C6AA99 */
+      /* opacity: 80%; */
+      color: var( --comments-fg-color );
 }
 
 .topics-box {
@@ -275,13 +331,12 @@
 
 .social-icon-hitbox-link i{
       transition: opacity 0.10s linear;
-      opacity: 50%;
-      color: var( --main-fg-color );
+      /* opacity: 50%; */
+      color: var(--comments-fg-color);
 }
 
 .social-icon-hitbox-link i:hover{
-      opacity: 100%;
-      color: var( --main-bg-color );
+      color: var( --accent-color );
 }
 
 .name,
@@ -338,13 +393,14 @@
 }
 
 .position-date {
-      padding-right: 8px;
+      padding-right: 10px;
       width: 27%; 
-      opacity: 70%;
+      /* opacity: 70%; */
       font-weight: 500;
       font-size: 0.8em;
       position: relative;
       top: 4px;
+      color: var( --comments-fg-color );
       background-color: var( --transparent );
 }
 
@@ -365,7 +421,8 @@
 
 .position-descr {
       font-size: 1em;
-      opacity: 60%;
+      /* opacity: 60%; */
+      color: var( --comments-fg-color );
       background-color: var( --transparent );
 }
 
@@ -386,8 +443,9 @@
 }
 
 .proj-row {
-      border-radius: 12px;
-      padding: 10px;
+      border-radius: 12px 0px 0px 12px;
+      /* padding: 10px; */
+      padding-right: 10px;
       display: flex;
       width: 100%;
       flex-direction: row;
@@ -399,15 +457,17 @@
       transition: transform 0.10s ease-in;
       font-weight: 500;
       text-decoration: none;
+      border-right: 2px solid var( --comments-fg-color );
 }
 
 .proj-row:hover {
-      color: var( --main-bg-color );
+      color: var( --accent-color );
       cursor: pointer;
-      transform: scale(0.96);
+      /* transform: scale(0.96); */
       text-decoration: underline;
       text-underline-position: under;
-      background-color: var( --main-bg-opacity-color );
+      border-right: 10px solid var( --main-fg-color );
+      /* background-color: var( --main-bg-opacity-color ); */
 }
 
 .proj-row:active {
@@ -424,13 +484,18 @@
       text-align: right;
 }
 
+.place-highlight {
+      color: var( --accent-comment-color );
+}
+
 .proj-img {
       width: 200px;
       height: 113px;
-      border-radius: 12px;
+      border-radius: 12px 0 0 12px;
       overflow: hidden;
       background-color: var( --transparent );
       transition:inherit ;
+      /* border: 1px solid var( --main-fg-color ); */
 }
 
 .proj-img img {
@@ -471,6 +536,10 @@
 
 @media screen and ( max-width: 1200px ){
 
+      #briefcase {
+            display: none;
+      }
+
       .hide-on-desktop {
             display: block;
       }
@@ -500,7 +569,7 @@
             margin-bottom: 15px;
       }
       .name-border {
-            border-bottom: 1px solid var( --main-fg-opacity-color );
+            border-bottom: 1px solid var( --comments-fg-color );
       }
 
 
@@ -571,7 +640,7 @@
       }
 
       .proj-row:hover {
-            color: var( --main-bg-color );
+            color: var( --accent-color );
             cursor: none;
             transform: none;
             text-decoration: none;

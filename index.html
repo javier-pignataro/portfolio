@@ -45,13 +45,14 @@
             <!-- Seccion: Fonts -->
             <style>
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-            </style>
+</style>
       </head>
 
 
       <body>
             <!-- HTML Content -->
-            <div id="birefcase">
+            <div id="briefcase">
+                  <div class="briefcase-bg"></div>
                   <div id="briefcase-locked">
                         <div class="briefcase-absolute" id="briefcase-locked-status-00"></div>
                         <div class="briefcase-absolute" id="briefcase-locked-status-01"></div>
@@ -65,127 +66,135 @@
                   </div>
 
                   <div id="briefcase-unlocked">
-                        <div class="briefcase-absolute" id="briefcase-unlocked-top"></div>
-                        <div class="briefcase-absolute" id="briefcase-unlocked-bottom"></div>
+                        <div class="briefcase-absolute pointer-probe" id="briefcase-unlocked-top"></div>
+                        <div class="briefcase-absolute pointer-probe" id="briefcase-unlocked-bottom"></div>
                   </div>
 
                   <div id="briefcase-padlocks-hitboxes">
                         <div id="briefcase-left-padlock"></div>
                         <div id="briefcase-right-padlock"></div>
                   </div>
+
+                  <div id="briefcase-shadows">
+                        <div id="briefcase-top-half-shadow"></div>
+                        <div id="briefcase-bottom-half-shadow"></div>
+                  </div>
             </div>
 
-            <div class="main-box">
+
+            <div class="briefcase-interior">
                   <div class="bg-img"></div>
                   <div class="bg-color"></div>
-                  <div class="left-box">
-                        <div class="name">Javier Pignataro</div>
-                        <div class="name-border-wrapper hide-on-desktop">
-                              <div class="name-border"></div>
-                        </div>
-
-                        <div class="occupation-box">
-                              <div class="occupation">Front-End Developer</div>
-                              <div class="occupation-descr">Web Page admin, designer and programmer.</div>
-                        </div>
-
-                        <div class="topics-box">
-                              <div id="about-topic" class="wrapper-topics"><div class="topics">ABOUT</div></div>
-                              <div id="experience-topic" class="wrapper-topics"><div class="topics">EXPERIENCE</div></div>
-                              <div id="projects-topic" class="wrapper-topics"><div class="topics">PROJECTS</div></div>
-                        </div>
-
-                        <div class="social-networks">
-                              <a class="social-icon-hitbox-link" href="https://github.com/javier-pignataro" target="_blank">
-                                    <i class="fa-brands fa-github"></i>
-                              </a>
-                              <a class="social-icon-hitbox-link" href="https://www.linkedin.com/in/javier-gonzalo-pignataro/" target="_blank">
-                                    <i class="fa-brands fa-linkedin"></i>
-                              </a>
-                              <a class="social-icon-hitbox-link" href="./pdf/javier-pignataro-cv.pdf" target="_blank">
-                                    <i class="fa-solid fa-id-card"></i>
-                              </a>
-                        </div>
-                  </div>
-
-                  <div class="mid-box"></div>
-
-                  <div class="right-box">
-                        <div class="right-box-wrapper">
-                              <div class="mobile-topics hide-on-desktop">
-                                    <div class="mobile-topics-wrapper">ABOUT</div>
+                  <div class="main-box">
+                        <div class="left-box">
+                              <div class="name">Javier Pignataro</div>
+                              <div class="name-border-wrapper hide-on-desktop">
+                                    <div class="name-border"></div>
                               </div>
 
-                              <section class="about-section">
-                                    <div>Curious about learning how the current technologies which build the entire world are made. Eager to share my knowledge, effort and patience with a work team.</div>
-                                    <div>Trained in several programming languages and experienced in problem solving, I’m more than prepared and ready for any upcoming challenges.</div>
-                              </section>
-
-                              <div class="mobile-topics hide-on-desktop">
-                                    <div class="mobile-topics-wrapper">EXPERIENCE</div>
+                              <div class="occupation-box">
+                                    <div class="occupation">Front-End Developer</div>
+                                    <div class="occupation-descr">Web Page admin, designer and programmer.</div>
                               </div>
 
-                              <section class="experience-section">
-                                    <div class="exp-row">
-                                          <div class="position-date">APR - MAY 2024</div>
-                                          <div class="position">
-                                                <div class="position-title">Backend Developer @ Artesanias Market</div>
-                                                <div class="position-descr">Web API design, development and implementation in node.js</div>
-                                          </div>
-                                    </div>
-                                    <div class="exp-row">
-                                          <div class="position-date">APR - JUL 2023</div>
-                                          <div class="position">
-                                                <div class="position-title">Software Developer Intern @ GAO Tek Inc.</div>
-                                                <div class="position-descr">Deliver useful and well written strategy documents for a diverse variety of company IT areas like website programming and internet / marketing. </div>
-                                          </div>
-                                    </div>
-                                    <div class="exp-row">
-                                          <div class="position-date">AUG - OCT 2021</div>
-                                          <div class="position">
-                                                <div class="position-title">Web Developer and Web Maintainer @ Super Interlaken</div>
-                                                <div class="position-descr">Design, develop, andministration and maintenance of an information web page for a supermarket group using native JavaScript, CSS and HTML. The page design includes mobile phone and desktop variants</div>
-                                          </div>
-                                    </div>
-                              </section>
-
-                              <div class="mobile-topics hide-on-desktop">
-                                    <div class="mobile-topics-wrapper">PROJECTS</div>
+                              <div class="topics-box">
+                                    <div id="about-topic" class="wrapper-topics"><div class="topics">ABOUT</div></div>
+                                    <div id="experience-topic" class="wrapper-topics"><div class="topics">EXPERIENCE</div></div>
+                                    <div id="projects-topic" class="wrapper-topics"><div class="topics">PROJECTS</div></div>
                               </div>
 
-                              <section class="projects-section">
-                                    <a href="https://market-artesanias.vercel.app/" target="_blank" class="proj-row">
-                                          <div class="proj-img">
-                                                <img src="./img/artesmarket-proj-img.png" alt="Image Project 3">
-                                          </div>
-                                          <div class="proj-title">Artesanias Market</div>
+                              <div class="social-networks">
+                                    <a class="social-icon-hitbox-link" href="https://github.com/javier-pignataro" target="_blank">
+                                          <i class="fa-brands fa-github"></i>
                                     </a>
-                                    <a href="http://super-interlaken.s3-website-sa-east-1.amazonaws.com/" target="_blank" class="proj-row">
-                                          <div class="proj-img">
-                                                <img src="./img/super-proj-img.png" alt="Image Project 1">
-                                          </div>
-                                          <div class="proj-title">Super Interlaken - Web Site</div>
+                                    <a class="social-icon-hitbox-link" href="https://www.linkedin.com/in/javier-gonzalo-pignataro/" target="_blank">
+                                          <i class="fa-brands fa-linkedin"></i>
                                     </a>
-                                    <a href="https://snack-picker.vercel.app/" target="_blank" class="proj-row">
-                                          <div class="proj-img">
-                                                <img src="./img/snackpckr-proj-img.png" alt="Image Project 2">
-                                          </div>
-                                          <div class="proj-title">Snack Picker - Contribution</div>
+                                    <a class="social-icon-hitbox-link" href="./pdf/javier-pignataro-cv.pdf" target="_blank">
+                                          <i class="fa-solid fa-id-card"></i>
                                     </a>
-                                    <a href="https://sportit-project.vercel.app/" target="_blank" class="proj-row">
-                                          <div class="proj-img">
-                                                <img src="./img/sport-proj-img.png" alt="Image Project 3">
-                                          </div>
-                                          <div class="proj-title">Sportit - Web Project</div>
-                                    </a>
+                              </div>
+                        </div>
 
-                                    <!-- <a  target="_blank" class="proj-row"> -->
-                                    <!--       <div class="proj-title">ToDo App - Web App Project (In development)</div> -->
-                                    <!--       <div class="proj-img"> -->
-                                    <!--             <img src="./img/todo-proj-img.png" alt="Image Project 4"> -->
-                                    <!--       </div> -->
-                                    <!-- </a> -->
-                              </section>
+                        <div class="mid-box"></div>
+
+                        <div class="right-box">
+                              <div class="right-box-wrapper">
+                                    <div class="mobile-topics hide-on-desktop">
+                                          <div class="mobile-topics-wrapper">ABOUT</div>
+                                    </div>
+
+                                    <section class="about-section">
+                                          <div>Curious about learning how the current technologies which build the entire world are made. Eager to share my knowledge, effort and patience with a work team.</div>
+                                          <div>Trained in several programming languages and experienced in problem solving, I’m more than prepared and ready for any upcoming challenges.</div>
+                                    </section>
+
+                                    <div class="mobile-topics hide-on-desktop">
+                                          <div class="mobile-topics-wrapper">EXPERIENCE</div>
+                                    </div>
+
+                                    <section class="experience-section">
+                                          <div class="exp-row">
+                                                <div class="position-date">APR - MAY 2024</div>
+                                                <div class="position">
+                                                      <div class="position-title">Backend Developer <span class="place-highlight">@ Artesan&iacute;as Market</span></div>
+                                                      <div class="position-descr">Web API design, development and implementation in node.js</div>
+                                                </div>
+                                          </div>
+                                          <div class="exp-row">
+                                                <div class="position-date">APR - JUL 2023</div>
+                                                <div class="position">
+                                                      <div class="position-title">Software Developer Intern <span class="place-highlight">@ GAO Tek Inc.</span></div>
+                                                      <div class="position-descr">Deliver useful and well written strategy documents for a diverse variety of company IT areas like website programming and internet / marketing. </div>
+                                                </div>
+                                          </div>
+                                          <div class="exp-row">
+                                                <div class="position-date">AUG - OCT 2021</div>
+                                                <div class="position">
+                                                      <div class="position-title">Web Developer and Web Maintainer <span class="place-highlight">@ Super Interlaken</span></div>
+                                                      <div class="position-descr">Design, develop, andministration and maintenance of an information web page for a supermarket group using native JavaScript, CSS and HTML. The page design includes mobile phone and desktop variants</div>
+                                                </div>
+                                          </div>
+                                    </section>
+
+                                    <div class="mobile-topics hide-on-desktop">
+                                          <div class="mobile-topics-wrapper">PROJECTS</div>
+                                    </div>
+
+                                    <section class="projects-section">
+                                          <a href="https://market-artesanias.vercel.app/" target="_blank" class="proj-row">
+                                                <div class="proj-img">
+                                                      <img src="./img/artesmarket-proj-img.png" alt="Image Project 3">
+                                                </div>
+                                                <div class="proj-title">Artesan&iacute;as Market - Web App</div>
+                                          </a>
+                                          <a href="http://super-interlaken.s3-website-sa-east-1.amazonaws.com/" target="_blank" class="proj-row">
+                                                <div class="proj-img">
+                                                      <img src="./img/super-proj-img.png" alt="Image Project 1">
+                                                </div>
+                                                <div class="proj-title">Super Interlaken - Web Site</div>
+                                          </a>
+                                          <a href="https://snack-picker.vercel.app/" target="_blank" class="proj-row">
+                                                <div class="proj-img">
+                                                      <img src="./img/snackpckr-proj-img.png" alt="Image Project 2">
+                                                </div>
+                                                <div class="proj-title">Snack Picker - Contribution</div>
+                                          </a>
+                                          <a href="https://sportit-project.vercel.app/" target="_blank" class="proj-row">
+                                                <div class="proj-img">
+                                                      <img src="./img/sport-proj-img.png" alt="Image Project 3">
+                                                </div>
+                                                <div class="proj-title">Sportit - Web Project</div>
+                                          </a>
+
+                                          <!-- <a  target="_blank" class="proj-row"> -->
+                                          <!--       <div class="proj-title">ToDo App - Web App Project (In development)</div> -->
+                                          <!--       <div class="proj-img"> -->
+                                          <!--             <img src="./img/todo-proj-img.png" alt="Image Project 4"> -->
+                                          <!--       </div> -->
+                                          <!-- </a> -->
+                                    </section>
+                              </div>
                         </div>
                   </div>
             </div>
