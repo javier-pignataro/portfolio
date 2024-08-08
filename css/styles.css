@@ -59,19 +59,19 @@
 }
 
       #briefcase-locked-status-00 {
-            background-image: url( "../img/briefcase-unlocking/briefcase-00.png" );
+            background-image: url( "../img/briefcase-unlocking/briefcase-00-optimized.png" );
             z-index: 3;
       }
       #briefcase-locked-status-01 {
-            background-image: url( "../img/briefcase-unlocking/briefcase-01.png" );
+            background-image: url( "../img/briefcase-unlocking/briefcase-01-optimized.png" );
             z-index: 2;
       }
       #briefcase-locked-status-10 {
-            background-image: url( "../img/briefcase-unlocking/briefcase-10.png" );
+            background-image: url( "../img/briefcase-unlocking/briefcase-10-optimized.png" );
             z-index: 2;
       }
       #briefcase-locked-status-11 {
-            background-image: url( "../img/briefcase-unlocking/briefcase-11.png" );
+            background-image: url( "../img/briefcase-unlocking/briefcase-11-optimized.png" );
             z-index: 2;
       }
 
@@ -88,14 +88,14 @@
 /* } */
 
       #briefcase-unlocked-top {
-            background-image: url( "../img/briefcase-opening/brief-top-half.png" );
+            background-image: url( "../img/briefcase-opening/brief-top-half-optimized.png" );
             z-index: 2;
             filter: none;
             top: 0px;
       }
 
       #briefcase-unlocked-bottom {
-            background-image: url( "../img/briefcase-opening/brief-bottom-half.png" );
+            background-image: url( "../img/briefcase-opening/brief-bottom-half-optimized.png" );
             z-index: 2;
             filter: none;
             top: 0px;
