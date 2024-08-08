@@ -324,19 +324,50 @@
       justify-content: flex-start;
 }
 
+.social-networks a {
+      text-decoration: none;
+}
+
 .social-icon-hitbox-link {
       margin-right: 18px;
       font-size: 2.0em;
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      align-items: center;
+      color: var(--comments-fg-color);
+      transition: color 0.10s linear;
 }
+
 
 .social-icon-hitbox-link i{
-      transition: opacity 0.10s linear;
+      color: inherit;
+      /* transition: opacity 0.10s linear; */
       /* opacity: 50%; */
-      color: var(--comments-fg-color);
+      /* color: var(--comments-fg-color); */
 }
 
-.social-icon-hitbox-link i:hover{
+
+.social-icon-hitbox-link div {
+      color: inherit;
+      display: block;
+      height: 100%;
+      /* min-width: 100%; */
+      max-width: 0;
+      overflow: hidden;
+      font-size: 0.6em;
+      text-decoration: none;
+      text-align: center;
+      vertical-align:middle;
+      transition: max-width ease .5s;
+}
+
+.social-icon-hitbox-link:hover{
       color: var( --accent-color );
+}
+
+.social-icon-hitbox-link:hover div{
+      max-width: 400px;
 }
 
 .name,
@@ -470,6 +501,13 @@
       /* background-color: var( --main-bg-opacity-color ); */
 }
 
+.proj-row:hover .proj-img {
+      filter: blur(0px) brightness(80%);
+}
+
+
+
+
 .proj-row:active {
       opacity: 40%;
 }
@@ -495,6 +533,7 @@
       overflow: hidden;
       background-color: var( --transparent );
       transition:inherit ;
+      filter: blur(2px) brightness(50%);
       /* border: 1px solid var( --main-fg-color ); */
 }
 
@@ -504,8 +543,9 @@
       width: 100%;
       height: 100%;
       background-color: var( --transparent );
-      transition:inherit ;
+      /* transition: ease 5s all ; */
 }
+
 
 
 .hide-on-desktop {
@@ -528,11 +568,21 @@
       }
 
       .proj-img {
+            /* filter: brightness(80%); */
             width: 150px;
             height: 84px;
       }
 
 }
+@media screen and ( max-width: 1360px ){
+      .social-icon-hitbox-link div {
+            font-size: 0.5em;
+      }
+      .social-icon-hitbox-link {
+            font-size: 1.7em;
+      }
+}
+
 
 @media screen and ( max-width: 1200px ){
 
