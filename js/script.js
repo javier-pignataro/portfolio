@@ -107,6 +107,18 @@ function initialice()
             // document.onwheel = tellScroll;
             desktop = true;
             window.addEventListener( "wheel", tellScroll );
+            socialLinks = document.querySelectorAll( ".social-icon-hitbox-link" );
+            console.log( socialLinks );
+            cvIcon = socialLinks[0].addEventListener( "mouseenter", displaySocialIconDescription );
+            mailIcon = socialLinks[1].addEventListener( "mouseenter", displaySocialIconDescription );
+            gitIcon = socialLinks[2].addEventListener( "mouseenter", displaySocialIconDescription );
+            linkedinIcon = socialLinks[3].addEventListener( "mouseenter", displaySocialIconDescription );
+            cvIcon = socialLinks[0].addEventListener( "mouseleave", removeSocialIconDescription );
+            mailIcon = socialLinks[1].addEventListener( "mouseleave", removeSocialIconDescription );
+            gitIcon = socialLinks[2].addEventListener( "mouseleave", removeSocialIconDescription );
+            linkedinIcon = socialLinks[3].addEventListener( "mouseleave", removeSocialIconDescription );
+            fixedSocialIconDescription = document.getElementById( "fixed-social-icon-description" );
+            fixedSocialIconDescriptionWrapper = document.getElementById( "fixed-social-icon-description-wrapper" );
             rightBoxWrapper = document.querySelector( '.right-box-wrapper' );
             rightBox = document.querySelector( '.right-box' );
             mainBox = document.querySelector( '.main-box' );
@@ -681,9 +693,35 @@ function initialice()
                   }
             }
 
+            function removeSocialIconDescription( e ){
+                  fixedSocialIconDescriptionWrapper.style.maxWidth = "0px";
+            }
 
+            function displaySocialIconDescription( e )
+            {
+                  string = "";
+                  switch (e.target.id) {
+                        case "linkedin-icon":
+                              string = "| LinkedIn"
+                                    break;
+                        case "mail-icon":
+                              string = "| Contact Me"
+                                    break;
+                        case "git-icon":
+                              string = "| GitHub Profile"
+                                    break;
+                        case "cv-icon":
+                              string = "| Curriculum Vitae"
+                                    break;
+                  }
+                  console.log( fixedSocialIconDescription );
+                  fixedSocialIconDescription.innerHTML = `${string}`;
+                  fixedSocialIconDescriptionWrapper.style.maxWidth = "16vw";
+
+            }
 
       }
+
 
 
 }

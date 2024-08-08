@@ -331,10 +331,6 @@
 .social-icon-hitbox-link {
       margin-right: 18px;
       font-size: 2.0em;
-      display: flex;
-      flex-direction: row;
-      gap: 5px;
-      align-items: center;
       color: var(--comments-fg-color);
       transition: color 0.10s linear;
 }
@@ -342,32 +338,29 @@
 
 .social-icon-hitbox-link i{
       color: inherit;
-      /* transition: opacity 0.10s linear; */
+      transition: color 0.10s linear;
       /* opacity: 50%; */
-      /* color: var(--comments-fg-color); */
+      color: var( --comments-fg-color );
 }
-
-
-.social-icon-hitbox-link div {
-      color: inherit;
-      display: block;
-      height: 100%;
-      /* min-width: 100%; */
-      max-width: 0;
+#fixed-social-icon-description-wrapper{
       overflow: hidden;
-      font-size: 0.6em;
-      text-decoration: none;
-      text-align: center;
-      vertical-align:middle;
-      transition: max-width ease .5s;
+      transition: max-width .5s linear;
+      height: 100%;
+      /* max-height: 0px; */
+      max-width: 0px;
 }
 
-.social-icon-hitbox-link:hover{
+#fixed-social-icon-description {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      height: 100%;
+      font-size: 1.2em;
       color: var( --accent-color );
+      width: 16vw;
 }
 
-.social-icon-hitbox-link:hover div{
-      max-width: 400px;
+.social-icon-hitbox-link:hover i {
+      color: var( --accent-color );
 }
 
 .name,
