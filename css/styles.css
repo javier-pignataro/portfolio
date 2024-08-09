@@ -145,10 +145,12 @@
 #briefcase-top-half-shadow {
       top: 0;
       transition: top .5s ease;
+      visibility: hidden;
 }
 #briefcase-bottom-half-shadow {
       top: 50vh;
       transition: top .5s ease;
+      visibility: hidden;
 }
 
 .briefcase-interior {
@@ -187,6 +189,7 @@
       height: 100vh;
       width: 100vw;
       overflow: hidden;
+      visibility: hidden;
       transform: scale(0.90);
       transition: transform 0.50s ease;
       z-index: 0;
@@ -254,7 +257,7 @@
 .name {
       font-size: 3.3125em;
       font-weight: 600;
-      border-bottom: 1px solid var( --main-fg-opacity-color );
+      border-bottom: 1px solid var( --accent-color );
       margin-bottom: 15px;
 }
 
@@ -267,7 +270,7 @@
       font-size: 1.5em;
       font-weight: 500;
       /* opacity: 80%; */
-      color: var( --comments-fg-color );
+      color: var( --main-fg-color );
 }
 
 .occupation-descr {
@@ -472,6 +475,7 @@
       padding-right: 10px;
       display: flex;
       width: 100%;
+      gap: 5px;
       flex-direction: row;
       align-items: flex-start;
       justify-content: space-between;
@@ -485,13 +489,21 @@
 }
 
 .proj-row:hover {
-      color: var( --accent-color );
+      /* color: var( --accent-color ); */
       cursor: pointer;
       /* transform: scale(0.96); */
-      text-decoration: underline;
       text-underline-position: under;
       border-right: 10px solid var( --main-fg-color );
       /* background-color: var( --main-bg-opacity-color ); */
+}
+
+.proj-row:hover .proj-text-block .proj-title {
+      color: var( --accent-color );
+      text-decoration: underline;
+}
+
+.proj-row:hover .proj-text-block .proj-brief-descr {
+      color: var( --comments-fg-color );
 }
 
 .proj-row:hover .proj-img {
@@ -505,14 +517,30 @@
       opacity: 40%;
 }
 
-.proj-title {
+.proj-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      color: inherit;
       width: 50%;
       height: 100px;
       background-color: var( --transparent );
       transition: inherit;
       font-weight: inherit;
       color: inherit;
+      overflow: hidden;
+}
+
+.proj-title {
+      transition: inherit;
+      font-weight: inherit;
+      color: inherit;
       text-align: right;
+}
+.proj-brief-descr {
+      text-align: right;
+      color: var( --main-fg-opacity-color );
+
 }
 
 .place-highlight {

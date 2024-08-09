@@ -151,6 +151,7 @@ function initialice()
                   brighterMainFgColor: "#fff1d1",
                   mainFgOpacityColor: "#ccbfa155",
                   mainBgColor: "#ffba6b",
+                  accentColor: "#ffba6b",
                   mainBgOpacityColor1: "#ffba6b99",
                   mainBgOpacityColor2: "#ffba6b33",
                   transparent: "#00000000",
@@ -231,7 +232,7 @@ function initialice()
                         this.current = i;
                         if( this.current !== this.currentSelected ) {
                               this.topicsChildrenIndex[this.current].style.fontWeight = "900";
-                              this.topicsChildrenIndex[this.current].style.color = this.brighterMainFgColor;
+                              this.topicsChildrenIndex[this.current].style.color = this.accentColor;
                         }
                   },
 
@@ -459,6 +460,8 @@ function initialice()
                               briefcaseUnlocked.renderBottomHalf.style.top = "0px";
                               briefcaseUnlocked.renderTopHalf.style.filter = "none";
                               briefcaseUnlocked.renderBottomHalf.style.filter = "none";
+                              briefcaseTopHalfShadow.style.visibility = "visible";
+                              briefcaseBottomHalfShadow.style.visibility = "visible";
                               briefcaseTopHalfShadow.style.top = "0px";
                               briefcaseBottomHalfShadow.style.top = "0px";
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
@@ -488,6 +491,7 @@ function initialice()
                               briefcaseOpeningSound.play();
                               // console.log(window.visualViewport.height);
                               briefcaseBg.style.opacity = "0%";
+                              mainBox.style.visibility = `visible`;
                               mainBox.style.transform = `scale(1)`;
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
 
@@ -702,16 +706,16 @@ function initialice()
                   string = "";
                   switch (e.target.id) {
                         case "linkedin-icon":
-                              string = "| LinkedIn"
+                              string = "|&nbsp;&nbsp;LinkedIn"
                                     break;
                         case "mail-icon":
-                              string = "| Contact Me"
+                              string = "|&nbsp;&nbsp;Contact Me"
                                     break;
                         case "git-icon":
-                              string = "| GitHub Profile"
+                              string = "|&nbsp;&nbsp;GitHub Profile"
                                     break;
                         case "cv-icon":
-                              string = "| Curriculum Vitae"
+                              string = "|&nbsp;&nbsp;Curriculum Vitae"
                                     break;
                   }
                   console.log( fixedSocialIconDescription );
