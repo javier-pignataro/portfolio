@@ -121,25 +121,26 @@
 }
 
 .hitbox-animation {
-      width: 250px;
-      height: 250px;
+      width: 280px;
+      height: 280px;
       border-radius: 100%;
       opacity: 0%;
       animation-name: hitbox-blinking-animation;
       animation-duration: 3s;
       animation-iteration-count: 10;
+      /* animation-direction: alternate; */
 }
 
 @keyframes hitbox-blinking-animation {
 0% {
-      width: 250px;
-      height: 250px;
       opacity: 0%;
       box-shadow: 0 0 100px black;
 }
-50% {
-      opacity: 100%;
-      box-shadow: 0 0 100px black;
+33% {
+      opacity: 40%;
+}
+66% {
+      opacity: 40%;
 }
 100% {
       /* width: 300px; */
