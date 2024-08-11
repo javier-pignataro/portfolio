@@ -112,18 +112,41 @@
       top: 0px;
       display: flex;
       flex-direction: row;
+      align-items: center;
+      justify-content:space-around;
+      gap: 35vw;
+      
+      padding-top: 8vh;
       z-index: 4;
 }
 
-#briefcase-left-padlock {
-      width: 50vw;
-      height: 100vh;
-      /* border: 1px solid black; */
+.hitbox-animation {
+      width: 250px;
+      height: 250px;
+      border-radius: 100%;
+      opacity: 0%;
+      animation-name: hitbox-blinking-animation;
+      animation-duration: 3s;
+      animation-iteration-count: 10;
 }
-#briefcase-right-padlock {
-      width: 50vw;
-      height: 100vh;
-      /* border: 1px solid black; */
+
+@keyframes hitbox-blinking-animation {
+0% {
+      width: 250px;
+      height: 250px;
+      opacity: 0%;
+      box-shadow: 0 0 100px black;
+}
+50% {
+      opacity: 100%;
+      box-shadow: 0 0 100px black;
+}
+100% {
+      /* width: 300px; */
+      /* height: 300px; */
+      opacity: 0%;
+      box-shadow: 0 0 100px black;
+}
 }
 
 #briefcase-shadows {
