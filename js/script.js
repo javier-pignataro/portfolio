@@ -61,9 +61,23 @@ function initialice()
             }
       }
 
+      // window.addEventListener( "resize", resizeListener );
+      // function resizeListener (e)
+      // {
+      //       console.log(e.target.innerWidth);
+      //       if( e.target.innerWidth < 1200 ){
+      //             responsiveMobile();
+      //       } else {
+      //             responsiveDesktop();
+      //       }
+      // }
+
       function responsiveMobile()
       {
             // Nothing yet
+            mainBox = document.querySelector( '.main-box' );
+            mainBox.style.visibility = `visible`;
+            // window.removeEventListener( "wheel", tellScroll );
       }
 
       function resetDesktopVariables()
@@ -371,6 +385,8 @@ function initialice()
                   fatherNode: document.getElementById("briefcase-padlocks-hitboxes"),
             }
 
+            briefcasePadlockHitboxes.fatherNode.addEventListener( "mouseenter", runHitboxAnimation );
+
             const clickSound = new Audio("../audio/padlock-click.mp3"); // buffers automatically when created
             const briefcaseOpeningSound = new Audio("../audio/opening-briefcase2.mp3"); // buffers automatically when created
 
@@ -379,18 +395,34 @@ function initialice()
             leftPadlock.addEventListener( "click", 
                   () =>
                   {
-                        toggleLockStatus(0b10)
-                              clickSound.play();
+                        toggleLockStatus(0b10);
+                        clickSound.play();
+                        // leftPadlock.style.animationName = "none";
+                        // rightPadlock.style.animationName = "none";
+                        // leftPadlock.style.transition = "none";
+                        //
+                        // leftPadlock.style.backgroundColor = "red";
+                        // leftPadlock.style.transition = "background-color .5s linear";
+                        // leftPadlock.style.backgroundColor = "transparent";
+                        // leftPadlock.style.width = "500px";
                   }
             );
 
             rightPadlock.addEventListener( "click", 
                   () =>
                   {
-                        toggleLockStatus(0b01)
-                              clickSound.play();
+                        toggleLockStatus(0b01);
+                        clickSound.play();
+                        // leftPadlock.style.animationName = "none";
+                        // rightPadlock.style.animationName = "none";
                   }
             );
+
+            function runHitboxAnimation()
+            {
+                        leftPadlock.style.animationName = "hitbox-blinking-animation";
+                        rightPadlock.style.animationName = "hitbox-blinking-animation";
+            }
 
             function toggleLockStatus( statusUpdating )
             {
