@@ -112,7 +112,7 @@
       animation-name: none;
       animation-direction: alternate;
       animation-duration: 1s;
-      animation-iteration-count: 4;
+      animation-iteration-count: 6;
 }
 
 @keyframes hitbox-blinking-animation {
