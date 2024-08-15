@@ -385,7 +385,7 @@ function initialice()
                   fatherNode: document.getElementById("briefcase-padlocks-hitboxes"),
             }
 
-            briefcasePadlockHitboxes.fatherNode.addEventListener( "mouseenter", runHitboxAnimation );
+            briefcasePadlockHitboxes.fatherNode.addEventListener( "mousemove", runHitboxAnimation );
 
             const clickSound = new Audio("../audio/padlock-click.mp3"); // buffers automatically when created
             const briefcaseOpeningSound = new Audio("../audio/opening-briefcase2.mp3"); // buffers automatically when created
