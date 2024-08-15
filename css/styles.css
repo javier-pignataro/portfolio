@@ -100,13 +100,13 @@
       align-items: center;
       justify-content:space-around;
       gap: 35vw;
-      padding-top: 8vh;
+      margin-top: 4vh;
       z-index: 4;
 }
 
 .hitbox-animation {
-      width: 280px;
-      height: 280px;
+      width: 27vw;
+      height: 27vw;
       border-radius: 100%;
       opacity: 100%;
       animation-name: none;
