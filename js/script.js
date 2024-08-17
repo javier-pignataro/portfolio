@@ -136,6 +136,7 @@ function initialice()
             rightBoxWrapper = document.querySelector( '.right-box-wrapper' );
             rightBox = document.querySelector( '.right-box' );
             mainBox = document.querySelector( '.main-box' );
+            bgImg = document.getElementById( "leather-bg" );
             maxShifting = rightBoxWrapper.clientHeight - rightBox.clientHeight;
             currentScrollPos = 0;
             velocityAcumulator = 100; // Fixed for the moment becouse an incompatibility with laptop trackpads
@@ -499,8 +500,8 @@ function initialice()
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
                               // briefcaseUnlocked.renderBottomHalf.classList.add(".briefcaseTransition")
                               // briefcaseUnlocked.renderTopHalf.classList.add(".briefcaseTransition")
-                              briefcaseUnlocked.renderBottomHalf.style.transition = "all .5s ease";
-                              briefcaseUnlocked.renderTopHalf.style.transition = "all .5s ease";
+                              briefcaseUnlocked.renderBottomHalf.style.transition = "all 1.5s ease-in-out";
+                              briefcaseUnlocked.renderTopHalf.style.transition = "all 1.5s ease-in-out";
                               // briefcaseUnlocked.renderTopHalf.style.top = "0px";
                               // briefcaseUnlocked.renderBottomHalf.style.top = "0px";
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
@@ -512,18 +513,21 @@ function initialice()
                                     // shiftAmount -= 50;
                               // console.log( briefcaseBottomHalfShadow );
 
-                              briefcaseUnlocked.renderTopHalf.style.top = `-${window.visualViewport.height * 0.47}px`;
-                              briefcaseUnlocked.renderBottomHalf.style.top = `${window.visualViewport.height * 0.47}px`;
-                              // briefcaseUnlocked.renderTopHalf.style.filter = "blur(5px)";
-                              // briefcaseUnlocked.renderBottomHalf.style.filter = "blur(5px)";
-                              briefcaseTopHalfShadow.style.top = `-${window.visualViewport.height * 0.47}px`;
-                              briefcaseBottomHalfShadow.style.top = `98vh`;
-                              briefcaseUnlocked.fatherNode.style.offsetHeight;
+                              briefcaseUnlocked.renderTopHalf.style.top = `-${window.visualViewport.height * 0.50}px`;
+                              briefcaseUnlocked.renderBottomHalf.style.top = `${window.visualViewport.height * 0.50}px`;
+                              // briefcaseUnlocked.renderTopHalf.style.filter = "brightness(50%)";
+                              // briefcaseUnlocked.renderBottomHalf.style.filter = "brightness(50%)";
+                              briefcaseTopHalfShadow.style.top = `0vh`;
+                              briefcaseBottomHalfShadow.style.top = `50vh`;
+                              briefcaseShadows.style.backgroundColor = "transparent";
+                              // briefcaseUnlocked.fatherNode.style.offsetHeight;
 
                               briefcaseOpeningSound.play();
                               // console.log(window.visualViewport.height);
                               briefcaseBg.style.opacity = "0%";
                               mainBox.style.visibility = `visible`;
+                              // mainBox.style.opacity = `100%`;
+                              // bgImg.style.opacity = `100%`;
                               mainBox.style.transform = `scale(1)`;
                               briefcaseUnlocked.fatherNode.style.offsetHeight;
 
@@ -541,7 +545,7 @@ function initialice()
 
                                           // window.addEventListener( "mousedown", briefcaseActivateDragMode )
                                     },
-                                    500
+                                    1500
                               );
                         },
                         350
