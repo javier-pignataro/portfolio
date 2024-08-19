@@ -390,6 +390,7 @@ function initialice()
 
             const clickSound = new Audio("../audio/padlock-click.mp3"); // buffers automatically when created
             const briefcaseOpeningSound = new Audio("../audio/opening-briefcase2.mp3"); // buffers automatically when created
+            const briefcaseOpeningHinge = new Audio("../audio/hinge3.mp3"); // buffers automatically when created
 
             // console.log(leftPadlock);
 
@@ -523,6 +524,7 @@ function initialice()
                               // briefcaseUnlocked.fatherNode.style.offsetHeight;
 
                               briefcaseOpeningSound.play();
+                              briefcaseOpeningHinge.play();
                               // console.log(window.visualViewport.height);
                               briefcaseBg.style.opacity = "0%";
                               mainBox.style.visibility = `visible`;
