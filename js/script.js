@@ -389,8 +389,8 @@ function initialice()
             briefcasePadlockHitboxes.fatherNode.addEventListener( "mousemove", runHitboxAnimation );
 
             const clickSound = new Audio("../audio/padlock-click.mp3"); // buffers automatically when created
-            const briefcaseOpeningSound = new Audio("../audio/opening-briefcase2.mp3"); // buffers automatically when created
-            const briefcaseOpeningHinge = new Audio("../audio/hinge3.mp3"); // buffers automatically when created
+            const briefcaseOpeningSound = new Audio("../audio/opening-briefcase.mp3"); // buffers automatically when created
+            const briefcaseOpeningHinge = new Audio("../audio/hinge.mp3"); // buffers automatically when created
 
             // console.log(leftPadlock);
 
